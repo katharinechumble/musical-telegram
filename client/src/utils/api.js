@@ -1,5 +1,7 @@
 // ! TO MAKE SURE WE DO NOT GO OVER OUR USAGE PLEASE TRY AND COMMENT OUT FETCH REQUESTS WHEN NOT IN USE
 
+// require("dotenv").config();
+
 // export const getStoreInfo = async (zip) => {
 // 	try {
 // 		const response = await fetch(

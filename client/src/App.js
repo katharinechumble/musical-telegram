@@ -4,6 +4,9 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
 import Navbar from "./components/Navbar";
 import SearchResults from "./components/SearchResults";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import SavedItems from "./components/SavedItems";
 
 const client = new ApolloClient({
 	request: (operation) => {
@@ -24,8 +27,13 @@ function App() {
 			<Router>
 				<>
 					<Navbar />
-					<SearchResults />
-					<Switch>{/* Here's where the pages will go */}</Switch>
+
+					<Switch>
+						<Route exact path="/searchresults" component={SearchResults} />
+						<Route exact path="/login" component={Login} />
+						<Route exact path="/signup" component={SignUp} />
+						<Route exact path="/saveditems" component={SavedItems} />
+					</Switch>
 				</>
 			</Router>
 		</ApolloProvider>

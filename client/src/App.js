@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
 import Navbar from "./components/Navbar";
+import ProductCard from "./components/ProductCard";
 
 const client = new ApolloClient({
 	request: (operation) => {
@@ -23,6 +24,7 @@ function App() {
 			<Router>
 				<>
 					<Navbar />
+					<ProductCard />
 					<Switch>{/* Here's where the pages will go */}</Switch>
 				</>
 			</Router>

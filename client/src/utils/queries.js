@@ -6,6 +6,8 @@ export const GET_ME = gql`
     {
         me {
             _id
+            firstname
+            lastname
             username
             email
             savedLists{}

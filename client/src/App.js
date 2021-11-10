@@ -29,7 +29,7 @@ function App() {
 					<Navbar />
 
 					<Switch>
-						<Route exact path="/searchresults" component={SearchResults} />
+						<Route exact path="/" component={SearchResults} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/signup" component={SignUp} />
 						<Route exact path="/saveditems" component={SavedItems} />

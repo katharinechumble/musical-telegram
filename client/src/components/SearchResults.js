@@ -1,6 +1,11 @@
 import React from "react";
 import ProductCard from "./ProductCard";
 import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import { InputAdornment } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import Button from "@mui/material/Button";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const SearchResults = () => {
 	const fakeArr = [
@@ -100,6 +105,39 @@ const SearchResults = () => {
 
 	return (
 		<>
+			<form
+				onSubmit={() => {
+					alert("hello");
+				}}
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					marginBottom: "8px",
+				}}
+			>
+				<TextField
+					variant="outlined"
+					label="Search"
+					margin="normal"
+					fullWidth
+					InputProps={{
+						startAdornment: (
+							<InputAdornment position="end">
+								<SearchIcon />
+							</InputAdornment>
+						),
+					}}
+				/>
+				<Button
+					type="submit"
+					variant="contained"
+					size="large"
+					endIcon={<ShoppingCartIcon />}
+				>
+					Shop
+				</Button>
+			</form>
+
 			<Grid container spacing={2} sx={{ justifyContent: "center" }}>
 				{fakeArr.map((item, i) => {
 					return (

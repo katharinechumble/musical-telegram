@@ -1,32 +1,32 @@
 // route to get logged in user's info (needs the token)
-export const getMe = (token) => {
-  return fetch("/api/users/me", {
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
-    },
-  });
-};
+// export const getMe = (token) => {
+//   return fetch("/api/users/me", {
+//     headers: {
+//       "Content-Type": "application/json",
+//       authorization: `Bearer ${token}`,
+//     },
+//   });
+// };
 
-export const createUser = (userData) => {
-  return fetch("/api/users", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
-};
+// export const createUser = (userData) => {
+//   return fetch("/api/users", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(userData),
+//   });
+// };
 
-export const loginUser = (userData) => {
-  return fetch("/api/users/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
-};
+// export const loginUser = (userData) => {
+//   return fetch("/api/users/login", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(userData),
+//   });
+// };
 
 // ! TO MAKE SURE WE DO NOT GO OVER OUR USAGE PLEASE TRY AND COMMENT OUT FETCH REQUESTS WHEN NOT IN USE
 
@@ -57,23 +57,22 @@ export const loginUser = (userData) => {
 // 	}
 // };
 
-// export const productSearch = async (query, storeId) => {
+// export const productSearch = async (query) => {
 // 	try {
 // 		const response = await fetch(
-// 			`https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search?store_id=${storeId}&keyword=${query}&offset=0&limit=24&sponsored=1&rating=0`,
+// 			`https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search?store_id=2126&keyword=${query}&offset=0&limit=24&sponsored=1&rating=0`,
 // 			{
 // 				method: "GET",
 // 				headers: {
 // 					"x-rapidapi-host":
 // 						"target-com-store-product-reviews-locations-data.p.rapidapi.com",
-// 					"x-rapidapi-key":
-// 						process.env.REACT_APP_API_KEY
+// 					"x-rapidapi-key": process.env.REACT_APP_API_KEY,
 // 				},
 // 			}
 // 		);
 
 // 		const data = await response.json();
-// 		console.log(data.products);
+
 // 		const results = data.products;
 
 // 		const searchData = [];
@@ -89,7 +88,7 @@ export const loginUser = (userData) => {
 
 // 			searchData.push(item);
 // 		}
-// 		console.log(searchData);
+
 // 		return searchData;
 // 	} catch (err) {
 // 		console.log(err);

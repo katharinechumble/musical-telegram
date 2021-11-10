@@ -35,8 +35,7 @@ const SignUp = () => {
     // ensuring form has all information input
     const form = event.currentTarget;
 
-    if (form.checkValidity() === false);
-    {
+    if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }

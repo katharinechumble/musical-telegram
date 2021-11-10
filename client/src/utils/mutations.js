@@ -23,7 +23,7 @@ export const ADD_USER = gql`
 		$username: String!
 		$email: String!
 		$password: String!
-		$zip: Number!
+		$zip: Int!
 	) {
 		addUser(
 			firstname: $firstname
@@ -44,8 +44,8 @@ export const ADD_USER = gql`
 
 // mutations for the list functions, will update once we've got those typeDefs settled.
 
-export const SAVE_LIST = gql`
-mutation saveList()`;
+// export const SAVE_LIST = gql`
+// mutation saveList()`;
 
-export const REMOVE_LIST = gql`
-mutation deleteList()`;
+// export const REMOVE_LIST = gql`
+// mutation deleteList()`;

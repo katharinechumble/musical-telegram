@@ -30,7 +30,7 @@ const typeDefs = gql`
 			username: String!
 			email: String!
 			password: String!
-			zip: Number!
+			zip: Int!
 		): Auth
 	}
 `;

@@ -6,166 +6,174 @@ import { ADD_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/react-hooks";
 
 const SignUp = () => {
-  // setting up initial form state
-  const [userFormData, setUserFormData] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    email: "",
-    password: "",
-    zip: "",
-  });
+	// setting up initial form state
+	const [userFormData, setUserFormData] = useState({
+		firstname: "",
+		lastname: "",
+		username: "",
+		email: "",
+		password: "",
+		zip: "",
+	});
 
-  //set state for form validation
-  const [validated] = useState(false);
+	//set state for form validation
+	const [validated] = useState(false);
 
-  //set state for alert
-  const [showAlert, setShowAlert] = useState(false);
+	//set state for alert
+	const [showAlert, setShowAlert] = useState(false);
 
-  // define adding user
-  const [createUser] = useMutation(ADD_USER);
+	// define adding user
+	const [createUser] = useMutation(ADD_USER);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
-  };
+	const handleInputChange = (event) => {
+		const { name, value } = event.target;
+		setUserFormData({ ...userFormData, [name]: value });
+	};
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+	const handleFormSubmit = async (event) => {
+		event.preventDefault();
 
-    // ensuring form has all information input
-    const form = event.currentTarget;
+		// ensuring form has all information input
+		const form = event.currentTarget;
 
-    if (form.checkValidity() === false);
-    {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+		if (form.checkValidity() === false);
+		{
+			event.preventDefault();
+			event.stopPropagation();
+		}
 
-    try {
-      const { data } = await createUser({
-        variables: { ...userFormData },
-      });
+		try {
+			const { data } = await createUser({
+				variables: { ...userFormData },
+			});
 
-      Auth.login(data.addUser.token);
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
-    }
+			Auth.login(data.addUser.token);
+		} catch (err) {
+			console.error(err);
+			setShowAlert(true);
+		}
 
-    setUserFormData({
-      firstname: "",
-      lastname: "",
-      username: "",
-      email: "",
-      password: "",
-      zip: "",
-    });
-  };
-  return (
-	  <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-		  <Alert
-		  dismissable
-		  onClose={() => setShowAlert(false)}
-		  show={showAlert}
-		  variant="danger">
-			  There was a problem with signing up! Please try again!
-		  </Alert>
-		  <Form.Group>
-			  <Form.Label htmlfor="firstname">First Name</Form.Label>
-			  <Form.Control
-			  type="text"
-			  placeholder="First Name"
-			  name="firstname"
-			  onChange={handleInputChange}
-			  value={userFormData.firstname}
-			  required/>
-			  <Form.Control.Feedback type="invalid">
-				  Please enter your first name!
-			  </Form.Control.Feedback>
-		  </Form.Group>
-		  <Form.Group>
-			  <Form.Label htmlfor="lastname">Last Name</Form.Label>
-			  <Form.Control
-			  type="text"
-			  placeholder="Last Name"
-			  name="lastname"
-			  onChange={handleInputChange}
-			  value={userFormData.lastname}
-			  required/>
-			  <Form.Control.Feedback type="invalid">
-				  Please enter your last name!
-			  </Form.Control.Feedback>
-		  </Form.Group>
-		  <Form.Group>
-			  <Form.Label htmlfor="username">Username</Form.Label>
-			  <Form.Control
-			  type="text"
-			  placeholder="Username"
-			  name="username"
-			  onChange={handleInputChange}
-			  value={userFormData.username}
-			  required/>
-			  <Form.Control.Feedback type="invalid">
-				  Please enter a username!
-			  </Form.Control.Feedback>
-		  </Form.Group>
-		  <Form.Group>
-			  <Form.Label htmlfor="email">Email</Form.Label>
-			  <Form.Control
-			  type="text"
-			  placeholder="Email"
-			  name="email"
-			  onChange={handleInputChange}
-			  value={userFormData.email}
-			  required/>
-			  <Form.Control.Feedback type="invalid">
-				  Please enter a valid email address!
-			  </Form.Control.Feedback>
-		  </Form.Group>
-		  <Form.Group>
-			  <Form.Label htmlfor="password">Password</Form.Label>
-			  <Form.Control
-			  type="text"
-			  placeholder="Password"
-			  name="Password"
-			  onChange={handleInputChange}
-			  value={userFormData.password}
-			  required/>
-			  <Form.Control.Feedback type="invalid">
-				  Please enter a password!
-			  </Form.Control.Feedback>
-		  </Form.Group>
-		  <Form.Group>
-			  <Form.Label htmlfor="zip">Zip code</Form.Label>
-			  <Form.Control
-			  type="text"
-			  placeholder="Zip Code"
-			  name="zip"
-			  onChange={handleInputChange}
-			  value={userFormData.zip}
-			  required/>
-			  <Form.Control.Feedback type="invalid">
-				  Please enter your zip code to find your local store!
-			  </Form.Control.Feedback>
-		  </Form.Group>
-		  <Button
-		  disabled={
-			  !(
-				  userFormData.firstname &&
-				  userFormData.lastname &&
-				  userFormData.username &&
-				  userFormData.email &&
-				  userFormData.password &&
-				  userFormData.zip
-			  )
-		  }
-		  type="submit"
-		  variant="success">
-			  submit
-		  </Button>
-	  </Form>
-  )
+		setUserFormData({
+			firstname: "",
+			lastname: "",
+			username: "",
+			email: "",
+			password: "",
+			zip: "",
+		});
+	};
+	return (
+		<Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+			<Alert
+				dismissable
+				onClose={() => setShowAlert(false)}
+				show={showAlert}
+				variant="danger"
+			>
+				There was a problem with signing up! Please try again!
+			</Alert>
+			<Form.Group>
+				<Form.Label htmlFor="firstname">First Name</Form.Label>
+				<Form.Control
+					type="text"
+					placeholder="First Name"
+					name="firstname"
+					onChange={handleInputChange}
+					value={userFormData.firstname}
+					required
+				/>
+				<Form.Control.Feedback type="invalid">
+					Please enter your first name!
+				</Form.Control.Feedback>
+			</Form.Group>
+			<Form.Group>
+				<Form.Label htmlFor="lastname">Last Name</Form.Label>
+				<Form.Control
+					type="text"
+					placeholder="Last Name"
+					name="lastname"
+					onChange={handleInputChange}
+					value={userFormData.lastname}
+					required
+				/>
+				<Form.Control.Feedback type="invalid">
+					Please enter your last name!
+				</Form.Control.Feedback>
+			</Form.Group>
+			<Form.Group>
+				<Form.Label htmlFor="username">Username</Form.Label>
+				<Form.Control
+					type="text"
+					placeholder="Username"
+					name="username"
+					onChange={handleInputChange}
+					value={userFormData.username}
+					required
+				/>
+				<Form.Control.Feedback type="invalid">
+					Please enter a username!
+				</Form.Control.Feedback>
+			</Form.Group>
+			<Form.Group>
+				<Form.Label htmlFor="email">Email</Form.Label>
+				<Form.Control
+					type="text"
+					placeholder="Email"
+					name="email"
+					onChange={handleInputChange}
+					value={userFormData.email}
+					required
+				/>
+				<Form.Control.Feedback type="invalid">
+					Please enter a valid email address!
+				</Form.Control.Feedback>
+			</Form.Group>
+			<Form.Group>
+				<Form.Label htmlFor="password">Password</Form.Label>
+				<Form.Control
+					type="text"
+					placeholder="Password"
+					name="password"
+					onChange={handleInputChange}
+					value={userFormData.password}
+					required
+				/>
+				<Form.Control.Feedback type="invalid">
+					Please enter a password!
+				</Form.Control.Feedback>
+			</Form.Group>
+			<Form.Group>
+				<Form.Label htmlFor="zip">Zip code</Form.Label>
+				<Form.Control
+					type="text"
+					placeholder="Zip Code"
+					name="zip"
+					onChange={handleInputChange}
+					value={userFormData.zip}
+					required
+				/>
+				<Form.Control.Feedback type="invalid">
+					Please enter your zip code to find your local store!
+				</Form.Control.Feedback>
+			</Form.Group>
+			<Button
+				disabled={
+					!(
+						userFormData.firstname &&
+						userFormData.lastname &&
+						userFormData.username &&
+						userFormData.email &&
+						userFormData.password &&
+						userFormData.zip
+					)
+				}
+				type="submit"
+				variant="success"
+			>
+				submit
+			</Button>
+		</Form>
+	);
 };
 
 export default SignUp;

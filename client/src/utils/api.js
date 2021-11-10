@@ -1,31 +1,31 @@
 // ! TO MAKE SURE WE DO NOT GO OVER OUR USAGE PLEASE TRY AND COMMENT OUT FETCH REQUESTS WHEN NOT IN USE
 
-export const getStoreInfo = async (zip) => {
-	try {
-		const response = await fetch(
-			`https://target-com-store-product-reviews-locations-data.p.rapidapi.com/location/search?zip=${zip}&radius=20`,
-			{
-				method: "GET",
-				headers: {
-					"x-rapidapi-host":
-						"target-com-store-product-reviews-locations-data.p.rapidapi.com",
-					"x-rapidapi-key": process.env.REACT_APP_API_KEY,
-				},
-			}
-		);
-		const data = await response.json();
-		const store = data.locations[0];
+// export const getStoreInfo = async (zip) => {
+// 	try {
+// 		const response = await fetch(
+// 			`https://target-com-store-product-reviews-locations-data.p.rapidapi.com/location/search?zip=${zip}&radius=20`,
+// 			{
+// 				method: "GET",
+// 				headers: {
+// 					"x-rapidapi-host":
+// 						"target-com-store-product-reviews-locations-data.p.rapidapi.com",
+// 					"x-rapidapi-key": process.env.REACT_APP_API_KEY,
+// 				},
+// 			}
+// 		);
+// 		const data = await response.json();
+// 		const store = data.locations[0];
 
-		const storeData = {
-			storeId: store.location_id,
-			address: store.address.address_line1,
-		};
-		console.log(storeData);
-		return storeData;
-	} catch (err) {
-		console.log(err);
-	}
-};
+// 		const storeData = {
+// 			storeId: store.location_id,
+// 			address: store.address.address_line1,
+// 		};
+// 		console.log(storeData);
+// 		return storeData;
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };
 
 // export const productSearch = async (query, storeId) => {
 // 	try {

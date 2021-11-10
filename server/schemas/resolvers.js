@@ -19,18 +19,14 @@ const resolvers = {
 
 	Mutation: {
 		addUser: async (parent, args) => {
-			const storeData = await getStoreInfo(args.zip);
+			// const userData = {
+			// 	firstname: args.firstname,
+			// 	lastname: args.lastname,
+			// 	username: args.username,
+			// 	email: args.email,
+			// };
 
-			const userData = {
-				firstname: args.firstname,
-				lastname: args.lastname,
-				username: args.username,
-				email: args.email,
-				storeId: storeData.storeId,
-				storeAddress: storeData.address,
-			};
-
-			const user = await User.create(userData);
+			const user = await User.create(args);
 			const token = signToken(user);
 
 			return { token, user };

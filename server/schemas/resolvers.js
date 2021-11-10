@@ -1,7 +1,6 @@
 const { User } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-import { getStoreInfo } from "../../client/src/utils/api";
 
 const resolvers = {
   Query: {

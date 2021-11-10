@@ -149,6 +149,21 @@ const SignUp = () => {
 				  Please enter your zip code to find your local store!
 			  </Form.Control.Feedback>
 		  </Form.Group>
+		  <Button
+		  disabled={
+			  !(
+				  userFormData.firstname &&
+				  userFormData.lastname &&
+				  userFormData.username &&
+				  userFormData.email &&
+				  userFormData.password &&
+				  userFormData.zip
+			  )
+		  }
+		  type="submit"
+		  variant="success">
+			  submit
+		  </Button>
 	  </Form>
   )
 };

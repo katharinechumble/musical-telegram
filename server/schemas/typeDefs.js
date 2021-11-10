@@ -9,7 +9,7 @@ const typeDefs = gql`
 		lastname: String
 		username: String
 		email: String
-		storeId: Number
+		storeId: Int
 		storeAddress: String
 	}
 
@@ -30,7 +30,7 @@ const typeDefs = gql`
 			username: String!
 			email: String!
 			password: String!
-			zip: Number!
+			zip: Int!
 		): Auth
 	}
 `;

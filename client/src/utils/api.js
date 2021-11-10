@@ -57,41 +57,40 @@
 // 	}
 // };
 
-// export const productSearch = async (query, storeId) => {
-// 	try {
-// 		const response = await fetch(
-// 			`https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search?store_id=${storeId}&keyword=${query}&offset=0&limit=24&sponsored=1&rating=0`,
-// 			{
-// 				method: "GET",
-// 				headers: {
-// 					"x-rapidapi-host":
-// 						"target-com-store-product-reviews-locations-data.p.rapidapi.com",
-// 					"x-rapidapi-key":
-// 						process.env.REACT_APP_API_KEY
-// 				},
-// 			}
-// 		);
+export const productSearch = async (query) => {
+	try {
+		const response = await fetch(
+			`https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search?store_id=2126&keyword=${query}&offset=0&limit=24&sponsored=1&rating=0`,
+			{
+				method: "GET",
+				headers: {
+					"x-rapidapi-host":
+						"target-com-store-product-reviews-locations-data.p.rapidapi.com",
+					"x-rapidapi-key": process.env.REACT_APP_API_KEY,
+				},
+			}
+		);
 
-// 		const data = await response.json();
-// 		console.log(data.products);
-// 		const results = data.products;
+		const data = await response.json();
 
-// 		const searchData = [];
+		const results = data.products;
 
-// 		for (let i = 0; i < results.length; i++) {
-// 			const item = {
-// 				itemName: results[i].item.product_description.title,
-// 				price: results[i].price.formatted_current_price,
-// 				imgUrl: results[i].item.enrichment.images.primary_image_url,
-// 				buyUrl: results[i].item.enrichment.buy_url,
-// 				description: results[i].item.product_description.soft_bullets.bullets,
-// 			};
+		const searchData = [];
 
-// 			searchData.push(item);
-// 		}
-// 		console.log(searchData);
-// 		return searchData;
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };
+		for (let i = 0; i < results.length; i++) {
+			const item = {
+				itemName: results[i].item.product_description.title,
+				price: results[i].price.formatted_current_price,
+				imgUrl: results[i].item.enrichment.images.primary_image_url,
+				buyUrl: results[i].item.enrichment.buy_url,
+				description: results[i].item.product_description.soft_bullets.bullets,
+			};
+
+			searchData.push(item);
+		}
+
+		return searchData;
+	} catch (err) {
+		console.log(err);
+	}
+};

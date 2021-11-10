@@ -15,7 +15,7 @@ const NavBar = () => {
 		<>
 			<BottomNavigation showLabels>
 				<BottomNavigationAction
-					onClick={() => window.location.assign("/searchresults")}
+					onClick={() => window.location.assign("/")}
 					label="Search"
 					icon={<SearchIcon />}
 				/>

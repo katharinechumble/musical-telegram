@@ -145,7 +145,7 @@ const SignUp = () => {
 			<Form.Group>
 				<Form.Label htmlFor="zip">Zip code</Form.Label>
 				<Form.Control
-					type="text"
+					type="number"
 					placeholder="Zip Code"
 					name="zip"
 					onChange={handleInputChange}

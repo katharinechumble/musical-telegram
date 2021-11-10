@@ -13,7 +13,6 @@ const SignUp = () => {
 		username: "",
 		email: "",
 		password: "",
-		zip: "",
 	});
 
 	//set state for form validation
@@ -59,7 +58,6 @@ const SignUp = () => {
 			username: "",
 			email: "",
 			password: "",
-			zip: "",
 		});
 	};
 	return (
@@ -142,20 +140,7 @@ const SignUp = () => {
 					Please enter a password!
 				</Form.Control.Feedback>
 			</Form.Group>
-			<Form.Group>
-				<Form.Label htmlFor="zip">Zip code</Form.Label>
-				<Form.Control
-					type="number"
-					placeholder="Zip Code"
-					name="zip"
-					onChange={handleInputChange}
-					value={userFormData.zip}
-					required
-				/>
-				<Form.Control.Feedback type="invalid">
-					Please enter your zip code to find your local store!
-				</Form.Control.Feedback>
-			</Form.Group>
+
 			<Button
 				disabled={
 					!(
@@ -163,8 +148,7 @@ const SignUp = () => {
 						userFormData.lastname &&
 						userFormData.username &&
 						userFormData.email &&
-						userFormData.password &&
-						userFormData.zip
+						userFormData.password
 					)
 				}
 				type="submit"

@@ -1,11 +1,12 @@
-import React from "react";
-// import { LOGIN_USER } from "../utils/mutations";
+import React, { useState } from "react";
+import { Form, Button, Alert } from "react-bootstrap";
+import { useMutation } from "@apollo/react-hooks";
 
 // import { loginUser } from '../utils/API';
 import Auth from "../utils/auth";
 import { LOGIN_USER } from "../utils/mutations";
 
-const LoginForm = () => {
+const Login = () => {
   const [userFormData, setUserFormData] = useState({
     username: "",
     password: "",
@@ -63,7 +64,7 @@ const LoginForm = () => {
             required
           />
           <Form.Control.Feedback type="invalid">
-            Username is required!
+            Username Is Required!
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -82,7 +83,7 @@ const LoginForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
         <Button
-          disabled={!(userFormData.username && userFormData.password)}
+          disabled={!(userFormData.email && userFormData.password)}
           type="submit"
           variant="success"
         >
@@ -93,4 +94,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default Login;

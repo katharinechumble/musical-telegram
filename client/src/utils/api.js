@@ -79,6 +79,7 @@
 
 // 		for (let i = 0; i < results.length; i++) {
 // 			const item = {
+// 				itemId: results[i].tcin,
 // 				itemName: results[i].item.product_description.title,
 // 				price: results[i].price.formatted_current_price,
 // 				imgUrl: results[i].item.enrichment.images.primary_image_url,
@@ -88,7 +89,7 @@
 
 // 			searchData.push(item);
 // 		}
-
+// 		console.log("searchData: ", searchData);
 // 		return searchData;
 // 	} catch (err) {
 // 		console.log(err);

@@ -3,33 +3,54 @@ const { gql } = require("apollo-server-express");
 
 // create our typeDefs
 const typeDefs = gql`
-  type User {
-    _id: ID!
-    firstname: String
-    lastname: String
-    username: String
-    email: String
-  }
+	type User {
+		_id: ID!
+		firstname: String
+		lastname: String
+		username: String
+		email: String
+		productCount: Int
+		savedProducts: [Product]
+	}
 
-  type Query {
-    me: User
-  }
+	type Product {
+		itemId: ID!
+		itemName: String!
+		price: String!
+		imgUrl: String
+		buyUrl: String
+		description: [String]
+	}
 
-  type Auth {
-    token: ID!
-    user: User
-  }
+	input SavedProduct {
+		itemId: ID!
+		itemName: String!
+		price: String!
+		imgUrl: String
+		buyUrl: String
+		description: [String]
+	}
 
-  type Mutation {
-    login(username: String!, password: String!): Auth
-    addUser(
-      firstname: String!
-      lastname: String!
-      username: String!
-      email: String!
-      password: String!
-    ): Auth
-  }
+	type Query {
+		me: User
+	}
+
+	type Auth {
+		token: ID!
+		user: User
+	}
+
+	type Mutation {
+		login(username: String!, password: String!): Auth
+		addUser(
+			firstname: String!
+			lastname: String!
+			username: String!
+			email: String!
+			password: String!
+		): Auth
+		saveProduct(productData: SavedProduct): User
+	}
 `;
 
 // export the typeDefs

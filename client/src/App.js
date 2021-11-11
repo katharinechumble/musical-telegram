@@ -32,7 +32,7 @@ function App() {
 						<Route exact path="/" component={SearchResults} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/signup" component={SignUp} />
-						<Route exact path="/saveditems" component={SavedItems} />
+						<Route exact path="/cart" component={SavedItems} />
 					</Switch>
 				</>
 			</Router>

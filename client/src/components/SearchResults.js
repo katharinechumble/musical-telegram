@@ -125,11 +125,13 @@ const SearchResults = () => {
 						return (
 							<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
 								<ProductCard
+									keyValue={item.itemId}
 									itemName={item.itemName}
 									buyUrl={item.buyUrl}
 									imgUrl={item.imgUrl}
 									price={item.price}
 									description={item.description}
+									searchResults={searchedItems}
 								/>
 							</Grid>
 						);

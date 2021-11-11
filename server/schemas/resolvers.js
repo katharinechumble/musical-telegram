@@ -7,9 +7,9 @@ const resolvers = {
 		// pull specific user
 		me: async (parent, args, context) => {
 			if (context.user) {
-				const userData = await User.findOne({ _id: context.user._id }).select(
-					"-__v -password"
-				);
+				const userData = await User.findOne({ _id: context.user._id })
+					.select("-__v -password")
+					.populate("savedProducts");
 				return userData;
 			}
 
@@ -50,7 +50,6 @@ const resolvers = {
 		},
 
 		saveProduct: async (parent, { productData }, context) => {
-			console.log("context: ", context);
 			if (context.user) {
 				const updatedUser = await User.findOneAndUpdate(
 					{ _id: context.user._id },

@@ -6,7 +6,43 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
+import { useMutation } from "@apollo/client";
+import { SAVE_PRODUCT } from "../utils/mutations";
+import Auth from "../utils/auth";
+
 const ProductCard = (props) => {
+	const [saveProduct] = useMutation(SAVE_PRODUCT);
+
+	const handleSaveProduct = async (event) => {
+		event.preventDefault();
+		console.log(event.target.id);
+
+		const productId = event.target.id;
+
+		const productToSave = props.searchResults.find(
+			(product) => product.itemId === productId
+		);
+		console.log("productToSave: ", productToSave);
+
+		const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+		if (!token) {
+			return false;
+		}
+
+		try {
+			const { data } = await saveProduct({
+				variables: {
+					productData: { ...productToSave },
+				},
+			});
+
+			return data;
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	const nameSplit = props.itemName.split("-");
 	const cleanedName = nameSplit[0].trim();
 
@@ -40,7 +76,12 @@ const ProductCard = (props) => {
 					justifyContent: "space-around",
 				}}
 			>
-				<Button variant="contained" size="small">
+				<Button
+					onClick={handleSaveProduct}
+					variant="contained"
+					size="small"
+					id={props.keyValue}
+				>
 					Add to List
 				</Button>
 				<a

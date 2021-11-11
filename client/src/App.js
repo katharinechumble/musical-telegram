@@ -1,7 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ApolloProvider } from "@apollo/react-hooks";
-import ApolloClient from "apollo-boost";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+
+// import { ApolloProvider } from "@apollo/react-hooks";
+// import ApolloClient from "apollo-boost";
+
+// * Components
 import Navbar from "./components/Navbar";
 import { StoreProvider } from "./utils/GlobalState";
 
@@ -10,17 +20,22 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import SavedItems from "./components/SavedItems";
 
-const client = new ApolloClient({
-  request: (operation) => {
-    const token = localStorage.getItem("id_token");
-
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : "",
-      },
-    });
-  },
+const httpLink = createHttpLink({
   uri: "/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("id_token");
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
 });
 
 function App() {
@@ -28,15 +43,14 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
-          <StoreProvider>
-            <Navbar />
-            <Switch>
-              <Route exact path="/" component={SearchResults} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={SignUp} />
-              <Route exact path="/saveditems" component={SavedItems} />
-            </Switch>
-          </StoreProvider>
+          <Navbar />
+
+          <Switch>
+            <Route exact path="/" component={SearchResults} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/cart" component={SavedItems} />
+          </Switch>
         </>
       </Router>
     </ApolloProvider>

@@ -7,9 +7,9 @@ const resolvers = {
     // pull specific user
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
+        const userData = await User.findOne({ _id: context.user._id })
+          .select("-__v -password")
+          .populate("savedProducts");
         return userData;
       }
 
@@ -19,6 +19,13 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, args) => {
+      // const userData = {
+      // 	firstname: args.firstname,
+      // 	lastname: args.lastname,
+      // 	username: args.username,
+      // 	email: args.email,
+      // };
+
       const user = await User.create(args);
       const token = signToken(user);
 
@@ -40,6 +47,18 @@ const resolvers = {
 
       const token = signToken(user);
       return { token, user };
+    },
+
+    saveProduct: async (parent, { productData }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { savedProducts: productData } },
+          { new: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError("Not Logged In");
     },
   },
 };

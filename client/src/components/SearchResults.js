@@ -14,12 +14,6 @@ import Paper from "@mui/material/Paper";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-const styles = {
-	root: {
-		marginLeft: 5,
-	},
-};
-
 const SearchResults = () => {
 	// hold search data
 	const [searchedItems, setSearchedItems] = useState([]);

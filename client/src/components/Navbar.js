@@ -16,57 +16,60 @@ import { useHistory } from "react-router";
 // import Auth from "../utils/auth";
 
 const NavBar = () => {
-  const history = useHistory();
+	const history = useHistory();
 
-  return (
-    <>
-      <Paper elevation={3}>
-        <BottomNavigation showLabels>
-          <BottomNavigationAction
-            onClick={() => history.push("/")}
-            label="Search"
-            icon={<SearchIcon />}
-          />
+	return (
+		<>
+			<Paper elevation={3}>
+				{/* Search */}
+				<BottomNavigation showLabels>
+					<BottomNavigationAction
+						onClick={() => history.push("/")}
+						label="Search"
+						icon={<SearchIcon />}
+					/>
+					{/* Lists */}
+					{Auth.loggedIn() ? (
+						<BottomNavigationAction
+							onClick={() => history.push("/lists")}
+							label="Your Lists"
+							icon={<ReorderIcon />}
+						/>
+					) : null}
+					{/* Cart */}
+					<BottomNavigationAction
+						onClick={() => history.push("/cart")}
+						label="Cart"
+						icon={<ShoppingCartIcon />}
+					/>
+					{/* Sign Up */}
+					{Auth.loggedIn() ? null : (
+						<BottomNavigationAction
+							onClick={() => history.push("/signup")}
+							label="Sign Up"
+							icon={<AssignmentIcon />}
+						/>
+					)}
+					{/* Log Out */}
 
-          <BottomNavigationAction
-            onClick={() => history.push("/cart")}
-            label="Cart"
-            icon={<ShoppingCartIcon />}
-          />
-
-          {Auth.loggedIn() ? (
-            <BottomNavigationAction
-              onClick={() => Auth.logout()}
-              label="Logout"
-              icon={<LogoutIcon />}
-            />
-          ) : (
-            <BottomNavigationAction
-              onClick={() => history.push("/login")}
-              label="Login"
-              icon={<LoginIcon />}
-            />
-          )}
-
-          {Auth.loggedIn() ? null : (
-            <BottomNavigationAction
-              onClick={() => history.push("/signup")}
-              label="Sign Up"
-              icon={<AssignmentIcon />}
-            />
-          )}
-
-          {Auth.loggedIn() ? (
-            <BottomNavigationAction
-              onClick={() => history.push("/lists")}
-              label="Your Lists"
-              icon={<ReorderIcon />}
-            />
-          ) : null}
-        </BottomNavigation>
-      </Paper>
-    </>
-  );
+					{Auth.loggedIn() ? (
+						<BottomNavigationAction
+							onClick={() => Auth.logout()}
+							label="Logout"
+							icon={<LogoutIcon />}
+						/>
+					) : (
+						// Log In
+						<BottomNavigationAction
+							onClick={() => history.push("/login")}
+							label="Login"
+							icon={<LoginIcon />}
+						/>
+					)}
+				</BottomNavigation>
+			</Paper>
+		</>
+	);
 };
 
 export default NavBar;

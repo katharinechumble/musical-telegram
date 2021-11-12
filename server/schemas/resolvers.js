@@ -60,6 +60,18 @@ const resolvers = {
       }
       throw new AuthenticationError("Not Logged In");
     },
+
+    createList: async (parent, { listName }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { savedLists: listName } },
+          { new: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError("Not Logged In");
+    },
   },
 };
 

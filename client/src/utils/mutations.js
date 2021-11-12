@@ -59,12 +59,14 @@ export const SAVE_PRODUCT = gql`
   }
 `;
 
-export const REMOVE_PRODUCT = gql`
-  mutation removeProduct($itemId: String!) {
-    removeProduct(itemId: $itemId) {
+export const CREATE_LIST = gql`
+  mutation createList($listName: listName) {
+    createList(listName: $listName) {
       _id
       username
-      email
+      savedLists {
+        listName
+      }
     }
   }
 `;

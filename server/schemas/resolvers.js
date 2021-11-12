@@ -60,16 +60,17 @@ const resolvers = {
       }
       throw new AuthenticationError("Not Logged In");
     },
-    removeProduct: async (parent, { itemId }, context) => {
+
+    createList: async (parent, { listName }, context) => {
       if (context.user) {
-        const updateUser = await User.findOneAndUpdate(
+        const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedProducts: { itemId: itemId } } },
+          { $push: { savedLists: listName } },
           { new: true }
         );
-        return updateUser;
+        return updatedUser;
       }
-	  throw new AuthenticationError("Not logged in");
+      throw new AuthenticationError("Not Logged In");
     },
   },
 };

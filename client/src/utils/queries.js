@@ -17,6 +17,7 @@ export const GET_ME = gql`
 				imgUrl
 				buyUrl
 				description
+				listTag
 			}
 		}
 	}

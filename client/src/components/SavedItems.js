@@ -5,6 +5,7 @@ import { GET_ME } from "../utils/queries";
 import Grid from "@mui/material/Grid";
 import ProductCard from "./ProductCard";
 import { REMOVE_PRODUCT } from "../utils/mutations";
+import { Button } from "react-bootstrap";
 
 const SavedItems = () => {
   const { data } = useQuery(GET_ME);

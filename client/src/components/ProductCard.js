@@ -56,11 +56,9 @@ const ProductCard = (props) => {
 
 	// * Handlers
 	const handleSaveProduct = async (id) => {
-		console.log("id: ", id);
 		const productToSave = await searchResults.find(
 			(product) => product.itemId === id
 		);
-		console.log("productToSave: ", productToSave);
 
 		const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -91,7 +89,6 @@ const ProductCard = (props) => {
 	const nameSplit = props.itemName.split("-");
 	const cleanedName = nameSplit[0].trim();
 
-	console.log("searchResults: ", searchResults);
 	// @ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
 	return (
 		<>

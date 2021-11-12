@@ -8,7 +8,6 @@ import ProductCard from "./ProductCard";
 const SavedItems = () => {
 	const { data } = useQuery(GET_ME);
 	const userData = data?.me || {};
-	console.log("userData: ", userData);
 
 	const userDataLength = Object.keys(userData).length;
 

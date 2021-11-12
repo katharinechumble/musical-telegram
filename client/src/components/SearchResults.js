@@ -115,7 +115,7 @@ const SearchResults = () => {
 				"Hmmm... No results"
 			) : (
 				<Grid container spacing={2} sx={{ justifyContent: "center" }}>
-					{searchedItems.map((item, i) => {
+					{searchedItems.map((item) => {
 						return (
 							<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
 								<ProductCard

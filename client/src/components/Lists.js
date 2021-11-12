@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
+
+import ProductCard from "./ProductCard";
+
 import { useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
+
+import Grid from "@mui/material/Grid";
 
 const Lists = () => {
 	const { data, loading } = useQuery(GET_ME);
@@ -38,21 +43,66 @@ const Lists = () => {
 		<>
 			<div>
 				<h1>Family</h1>
-				{family
-					? family.map((item) => <p key={item.itemId}>{item.itemName}</p>)
-					: null}
+				<Grid container spacing={2} sx={{ justifyContent: "center" }}>
+					{family
+						? family.map((item) => {
+								return (
+									<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
+										<ProductCard
+											keyValue={item.itemId}
+											itemName={item.itemName}
+											buyUrl={item.buyUrl}
+											imgUrl={item.imgUrl}
+											price={item.price}
+											description={item.description}
+										/>
+									</Grid>
+								);
+						  })
+						: null}
+				</Grid>
 			</div>
 			<div>
 				<h1>Friends</h1>
-				{friends
-					? friends.map((item) => <p key={item.itemId}>{item.itemName}</p>)
-					: null}
+				<Grid container spacing={2} sx={{ justifyContent: "center" }}>
+					{friends
+						? friends.map((item) => {
+								return (
+									<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
+										<ProductCard
+											keyValue={item.itemId}
+											itemName={item.itemName}
+											buyUrl={item.buyUrl}
+											imgUrl={item.imgUrl}
+											price={item.price}
+											description={item.description}
+										/>
+									</Grid>
+								);
+						  })
+						: null}
+				</Grid>
 			</div>
 			<div>
 				<h1>Co-Workers</h1>
-				{coWorker
-					? coWorker.map((item) => <p key={item.itemId}>{item.itemName}</p>)
-					: null}
+				<Grid container spacing={2} sx={{ justifyContent: "center" }}>
+					{coWorker
+						? coWorker.map((item) => {
+								return (
+									<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
+										<ProductCard
+											keyValue={item.itemId}
+											itemName={item.itemName}
+											buyUrl={item.buyUrl}
+											imgUrl={item.imgUrl}
+											price={item.price}
+											description={item.description}
+										/>
+									</Grid>
+								);
+						  })
+						: null}
+				</Grid>
 			</div>
 		</>
 	);

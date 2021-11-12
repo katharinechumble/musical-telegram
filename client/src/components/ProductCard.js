@@ -36,7 +36,7 @@ const ProductCard = (props) => {
 	// * Items State
 	const [searchResults] = useState(props.searchResults);
 	const [selectedItem, setSelectedItem] = useState("");
-	const [radioValue, setRadioValue] = useState("");
+	const [radioValue, setRadioValue] = useState("family");
 
 	// * Modal State
 	const [open, setOpen] = useState(false);
@@ -86,6 +86,7 @@ const ProductCard = (props) => {
 	};
 
 	// * Name Util
+
 	const nameSplit = props.itemName.split("-");
 	const cleanedName = nameSplit[0].trim();
 

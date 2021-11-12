@@ -29,6 +29,7 @@ const userSchema = new Schema(
 			required: true,
 		},
 		savedProducts: [productSchema],
+		cartProducts: [productSchema],
 	},
 	// set this to use virtual below
 	{
@@ -55,6 +56,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 userSchema.virtual("productCount").get(function () {
 	return this.savedProducts.length;
+});
+
+userSchema.virtual("cartCount").get(function () {
+	return this.cartProducts.length;
 });
 
 const User = model("User", userSchema);

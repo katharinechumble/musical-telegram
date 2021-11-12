@@ -69,6 +69,7 @@ const resolvers = {
         );
         return updateUser;
       }
+	  throw new AuthenticationError("Not logged in");
     },
   },
 };

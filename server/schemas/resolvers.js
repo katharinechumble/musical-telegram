@@ -72,6 +72,18 @@ const resolvers = {
       }
       throw new AuthenticationError("Not Logged In");
     },
+
+    removeProduct: async (parent, { itemId }, context) => {
+      if (context.user) {
+        const updateUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedProducts: { itemId: itemId } } },
+          { new: true }
+        );
+        return updateUser;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
   },
 };
 

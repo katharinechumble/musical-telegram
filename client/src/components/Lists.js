@@ -9,14 +9,15 @@ import { GET_ME } from "../utils/queries";
 import Grid from "@mui/material/Grid";
 
 //addToCart Functionality.
-let listItemArr = [];
+let userItems;
+
 const addToCart = () => {
   console.log("You clicked the add to cart button");
-  console.log("listItemArr: ", listItemArr);
+  console.log("listItemArr: ", userItems);
   //Now that I'm getting all the items on the list page to the cartArray when hitting
   //Add to Cart need to narrow it down so that it only adds the selected item to the cart array.
-  for (let i = 0; i < listItemArr.length; i++) {
-    console.log(listItemArr.listItems);
+  for (let i = 0; i < userItems.length; i++) {
+    console.log("userItems: ", userItems[i].itemName);
   }
 };
 
@@ -27,8 +28,7 @@ const Lists = () => {
 
   //Trying to get the selected item from the list to the cartArray
   //So that can be pushed to the eventual cart page.
-  let userItems = userData.savedProducts;
-  listItemArr.push(userItems);
+  userItems = userData.savedProducts;
   console.log("userItems: ", userItems);
 
   const [family, setFamily] = useState([]);

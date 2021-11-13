@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
+import Button from "@mui/material/Button";
+import { Form, Alert } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 
 import Auth from "../utils/auth";
@@ -43,52 +44,50 @@ const Login = () => {
 
   return (
     <>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert
-          dismissible
-          onClose={() => setShowAlert(false)}
-          show={showAlert}
-          variant="danger"
-        >
-          Something went wrong with your login credentials!
-        </Alert>
-        <Form.Group>
-          <Form.Label htmlFor="username">Username</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Your username"
-            name="username"
-            onChange={handleInputChange}
-            value={userFormData.username}
-            required
-          />
-          <Form.Control.Feedback type="invalid">
-            Username Is Required!
-          </Form.Control.Feedback>
-        </Form.Group>
+      <div className="login-style">
+        <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+          <Alert
+            id="login-alert"
+            className="login-style"
+            dismissible
+            onClose={() => setShowAlert(false)}
+            show={showAlert}
+            variant="danger"
+          >
+            Something went wrong with your login credentials!
+          </Alert>
+          <Form.Group>
+            <Form.Label htmlFor="username">Username</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Your username"
+              name="username"
+              onChange={handleInputChange}
+              value={userFormData.username}
+              required
+            />
+          </Form.Group>
 
-        <Form.Group>
-          <Form.Label htmlFor="password">Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Your password"
-            name="password"
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
-          />
-          <Form.Control.Feedback type="invalid">
-            Password is required!
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Button
-          disabled={!(userFormData.username && userFormData.password)}
-          type="submit"
-          variant="success"
-        >
-          Submit
-        </Button>
-      </Form>
+          <Form.Group>
+            <Form.Label htmlFor="password">Password</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Your password"
+              name="password"
+              onChange={handleInputChange}
+              value={userFormData.password}
+              required
+            />
+          </Form.Group>
+          <Button
+            disabled={!(userFormData.username && userFormData.password)}
+            type="submit"
+            variant="contained"
+          >
+            Submit
+          </Button>
+        </Form>
+      </div>
     </>
   );
 };

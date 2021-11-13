@@ -1,7 +1,8 @@
 import React from "react";
+import Auth from "../utils/auth";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
-import BUTTON from "@mui/material/Button";
+import Button from "@mui/material/Button";
 import { REMOVE_PRODUCT } from "../utils/mutations";
 
 import Grid from "@mui/material/Grid";
@@ -42,7 +43,7 @@ const SavedItems = () => {
           });
         },
       });
-      removeProductId(itemId);
+      // removeProductId(itemId);
     } catch (err) {
       console.error(err);
     }

@@ -8,10 +8,28 @@ import { GET_ME } from "../utils/queries";
 
 import Grid from "@mui/material/Grid";
 
+//addToCart Functionality.
+let listItemArr = [];
+const addToCart = () => {
+  console.log("You clicked the add to cart button");
+  console.log("listItemArr: ", listItemArr);
+  //Now that I'm getting all the items on the list page to the cartArray when hitting
+  //Add to Cart need to narrow it down so that it only adds the selected item to the cart array.
+  for (let i = 0; i < listItemArr.length; i++) {
+    console.log(listItemArr.listItems);
+  }
+};
+
 const Lists = () => {
   const { data, loading } = useQuery(GET_ME);
   const userData = data?.me || {};
-  console.log("userData: ", userData);
+  //console.log("userData: ", userData);
+
+  //Trying to get the selected item from the list to the cartArray
+  //So that can be pushed to the eventual cart page.
+  let userItems = userData.savedProducts;
+  listItemArr.push(userItems);
+  console.log("userItems: ", userItems);
 
   const [family, setFamily] = useState([]);
   const [friends, setFriends] = useState([]);
@@ -39,7 +57,8 @@ const Lists = () => {
   if (loading) {
     return <h2>Loading...</h2>;
   }
-  console.log("family: ", family);
+  //   console.log("family: ", family);
+
   return (
     <>
       <div>
@@ -59,7 +78,11 @@ const Lists = () => {
                         description={item.description}
                       />
                       <div className="list-addtocart">
-                        <Button type="submit" variant="contained">
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          onClick={addToCart}
+                        >
                           Add To Cart
                         </Button>
                       </div>
@@ -87,7 +110,11 @@ const Lists = () => {
                         description={item.description}
                       />
                       <div className="list-addtocart">
-                        <Button type="submit" variant="contained">
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          onClick={addToCart}
+                        >
                           Add To Cart
                         </Button>
                       </div>
@@ -115,7 +142,11 @@ const Lists = () => {
                         description={item.description}
                       />
                       <div className="list-addtocart">
-                        <Button type="submit" variant="contained">
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          onClick={addToCart}
+                        >
                           Add To Cart
                         </Button>
                       </div>

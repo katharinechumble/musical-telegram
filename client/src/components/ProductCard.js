@@ -69,7 +69,11 @@ const ProductCard = (props) => {
 		try {
 			const { data } = await saveProduct({
 				variables: {
-					productData: { ...productToSave, listTag: radioValue },
+					productData: {
+						...productToSave,
+						listTag: radioValue,
+						cartValue: false,
+					},
 				},
 			});
 

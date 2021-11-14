@@ -20,6 +20,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import SavedItems from "./components/SavedItems";
 import Lists from "./components/Lists";
+import Cart from "./components/Cart";
 
 const httpLink = createHttpLink({
 	uri: "/graphql",
@@ -50,7 +51,7 @@ function App() {
 						<Route exact path="/" component={SearchResults} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/signup" component={SignUp} />
-						<Route exact path="/cart" component={SavedItems} />
+						<Route exact path="/cart" component={Cart} />
 						<Route exact path="/lists" component={Lists} />
 					</Switch>
 				</>

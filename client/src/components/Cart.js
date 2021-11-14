@@ -9,6 +9,7 @@ const Cart = () => {
 	const { data, loading } = useQuery(GET_ME);
 	const userData = data?.me || {};
 
+	console.log("userData: ", userData);
 	const [cart, setCart] = useState([]);
 
 	useEffect(() => {

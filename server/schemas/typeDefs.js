@@ -59,7 +59,7 @@ const typeDefs = gql`
     saveProduct(productData: SavedProduct): User
     createList(listName: String!): User
     removeProduct(productId: String!): User
-    removeListItem(itemId: ID!): User
+    removeListItem(itemId: String!): User
   }
 `;
 

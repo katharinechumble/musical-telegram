@@ -10,7 +10,7 @@ import { ADD_TO_CART } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 import Grid from "@mui/material/Grid";
-import { ADD_TO_CART, REMOVE_LIST_ITEM } from "../utils/mutations";
+import { REMOVE_LIST_ITEM } from "../utils/mutations";
 
 //addToCart Functionality global.
 

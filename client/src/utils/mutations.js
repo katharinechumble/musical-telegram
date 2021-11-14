@@ -109,23 +109,13 @@ export const REMOVE_LIST_ITEM = gql`
   }
 `;
 
-export const ADD_TO_CART = gql`
-  mutation addToCart($productData: SavedProduct) {
-    addToCart(productData: $productData) {
+export const REMOVE_CART_ITEM = gql`
+  mutation removeCartItem($itemId: String!) {
+    removeCartItem(itemId: $itemId) {
       _id
       username
       email
-    }
-  }
-`;
-
-export const ADD_TO_CART = gql`
-  mutation addToCartItem($itemId: String!) {
-    addToCartItem(itemId: $itemId) {
-      id
-      username
-      email
-      savedProducts {
+      cartProducts {
         itemId
         itemName
         price
@@ -133,6 +123,16 @@ export const ADD_TO_CART = gql`
         buyUrl
         description
       }
+    }
+  }
+`;
+
+export const ADD_TO_CART = gql`
+  mutation addToCart($productData: SavedProduct) {
+    addToCart(productData: $productData) {
+      _id
+      username
+      email
     }
   }
 `;

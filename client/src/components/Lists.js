@@ -4,11 +4,14 @@ import ProductCard from "./ProductCard";
 import Button from "@mui/material/Button";
 
 import { useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
+import Auth from "../utils/auth";
 
 import Grid from "@mui/material/Grid";
+import { REMOVE_LIST_ITEM } from "../utils/mutations";
 
-//addToCart Functionality global variables.
+//addToCart Functionality global.
 let userItems;
 let cartArray = [];
 
@@ -19,6 +22,8 @@ const Lists = () => {
   const [family, setFamily] = useState([]);
   const [friends, setFriends] = useState([]);
   const [coWorker, setCoWorker] = useState([]);
+
+  const [removeListItem] = useMutation(REMOVE_LIST_ITEM);
 
   useEffect(() => {
     if (!loading && userData) {
@@ -52,6 +57,23 @@ const Lists = () => {
     console.log("cartArray: ", cartArray);
   };
 
+  //remove list item functionality.
+  const removeItem = async (itemId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+    try {
+      const { data } = await removeListItem({
+        variables: { itemId },
+      });
+      console.log(data, itemId);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -81,6 +103,13 @@ const Lists = () => {
                           onClick={() => handleAddToCart(item.itemId)}
                         >
                           Add To Cart
+                        </Button>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          onClick={() => removeItem(item.itemId)}
+                        >
+                          Remove Item
                         </Button>
                       </div>
                     </Grid>
@@ -114,6 +143,13 @@ const Lists = () => {
                         >
                           Add To Cart
                         </Button>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          onClick={() => removeItem(item.itemId)}
+                        >
+                          Remove Item
+                        </Button>
                       </div>
                     </Grid>
                   </>
@@ -145,6 +181,13 @@ const Lists = () => {
                           onClick={() => handleAddToCart(item.itemId)}
                         >
                           Add To Cart
+                        </Button>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          onClick={() => removeItem(item.itemId)}
+                        >
+                          Remove Item
                         </Button>
                       </div>
                     </Grid>

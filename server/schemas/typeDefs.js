@@ -11,6 +11,7 @@ const typeDefs = gql`
     email: String
     productCount: Int
     savedProducts: [Product]
+    cartProducts: [Product]
   }
 
   type Product {
@@ -60,6 +61,7 @@ const typeDefs = gql`
     createList(listName: String!): User
     removeProduct(productId: String!): User
     removeListItem(itemId: String!): User
+    addToCartItem(itemId: String!): User
   }
 `;
 

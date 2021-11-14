@@ -9,7 +9,7 @@ import { GET_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 
 import Grid from "@mui/material/Grid";
-import { REMOVE_LIST_ITEM } from "../utils/mutations";
+import { ADD_TO_CART, REMOVE_LIST_ITEM } from "../utils/mutations";
 
 //addToCart Functionality global.
 let userItems;
@@ -24,6 +24,7 @@ const Lists = () => {
   const [coWorker, setCoWorker] = useState([]);
 
   const [removeListItem] = useMutation(REMOVE_LIST_ITEM);
+  const [addToCartItem] = useMutation(ADD_TO_CART);
 
   useEffect(() => {
     if (!loading && userData) {
@@ -74,6 +75,22 @@ const Lists = () => {
     }
   };
 
+  const addItemToCart = async (itemId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+    try {
+      const { data } = await addToCartItem({
+        variables: { itemId },
+      });
+      console.log(data, itemId);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -100,7 +117,7 @@ const Lists = () => {
                         <Button
                           type="submit"
                           variant="contained"
-                          onClick={() => handleAddToCart(item.itemId)}
+                          onClick={() => addItemToCart(item.itemId)}
                         >
                           Add To Cart
                         </Button>

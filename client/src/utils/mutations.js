@@ -44,6 +44,14 @@ export const ADD_USER = gql`
           buyUrl
           description
         }
+        cartProducts {
+          itemId
+          itemName
+          price
+          imgUrl
+          buyUrl
+          description
+        }
       }
     }
   }
@@ -85,6 +93,24 @@ export const REMOVE_LIST_ITEM = gql`
   mutation removeListItem($itemId: String!) {
     removeListItem(itemId: $itemId) {
       _id
+      username
+      email
+      savedProducts {
+        itemId
+        itemName
+        price
+        imgUrl
+        buyUrl
+        description
+      }
+    }
+  }
+`;
+
+export const ADD_TO_CART = gql`
+  mutation addToCartItem($itemId: String!) {
+    addToCartItem(itemId: $itemId) {
+      id
       username
       email
       savedProducts {

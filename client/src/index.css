@@ -21,27 +21,25 @@
 }
 
 #signUp-alert {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: dotted red;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: dotted red;
 }
 
 #login-alert {
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: dotted red;
-
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: dotted red;
 }
 
 #login-alert button {
-    position: relative;
-    display: flex;
-    justify-content: center;
+	position: relative;
+	display: flex;
+	justify-content: center;
 	color: black;
 	margin: 0 auto;
 	font-size: 16px;
@@ -59,9 +57,8 @@
 .login-style input[type="text"],
 .login-style textarea,
 .login-style select {
-    
 	font-family: Georgia, "Times New Roman", Times, serif;
-	background: rgba(255,255,255,.1);
+	background: rgba(255, 255, 255, 0.1);
 	border: none;
 	border-radius: 4px;
 	font-size: 15px;
@@ -69,29 +66,28 @@
 	outline: 0;
 	padding: 10px;
 	width: 100%;
-	box-sizing: border-box; 
+	box-sizing: border-box;
 	background-color: #e8eeef;
-	color:#8a97a0;
-	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+	color: #8a97a0;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
 	margin-bottom: 30px;
 }
 .login-style input[type="text"]:focus,
 .login-style textarea:focus,
-.login-style select:focus{
+.login-style select:focus {
 	background: #d2d9dd;
 }
-.login-style select{
+.login-style select {
 	-webkit-appearance: menulist-button;
-	height:35px;
+	height: 35px;
 }
 
 .login-style input[type="submit"],
-.login-style input[type="button"]
-{
+.login-style input[type="button"] {
 	position: relative;
 	display: block;
 	padding: 19px 39px 18px 39px;
-	color: #FFF;
+	color: #fff;
 	margin: 0 auto;
 	font-size: 18px;
 	text-align: center;
@@ -102,7 +98,7 @@
 }
 
 .list-addtocart {
-    display: flex;
-    justify-content: center;
-    margin: 5px;
+	display: flex;
+	justify-content: space-evenly;
+	margin: 5px;
 }

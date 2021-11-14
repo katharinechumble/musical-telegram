@@ -41,6 +41,7 @@ const ProductCard = (props) => {
 	// * Modal State
 	const [open, setOpen] = useState(false);
 	const handleOpen = (event) => {
+		event.preventDefault();
 		setOpen(true);
 
 		const productId = event.target.id;
@@ -69,10 +70,13 @@ const ProductCard = (props) => {
 		try {
 			const { data } = await saveProduct({
 				variables: {
-					productData: { ...productToSave, listTag: radioValue },
+					productData: {
+						...productToSave,
+						listTag: radioValue,
+					},
 				},
 			});
-
+			console.log("data: ", data);
 			return data;
 		} catch (err) {
 			console.log(err);
@@ -90,7 +94,7 @@ const ProductCard = (props) => {
 	const nameSplit = props.itemName.split("-");
 	const cleanedName = nameSplit[0].trim();
 
-	// @ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
+	// @ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	return (
 		<>
 			<Card sx={{ maxWidth: 345 }} key={props.keyValue}>

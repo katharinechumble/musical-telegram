@@ -19,6 +19,15 @@ export const GET_ME = gql`
 				description
 				listTag
 			}
+			cartProducts {
+				itemId
+				itemName
+				price
+				imgUrl
+				buyUrl
+				description
+				listTag
+			}
 		}
 	}
 `;

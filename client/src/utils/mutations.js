@@ -44,7 +44,15 @@ export const ADD_USER = gql`
 					buyUrl
 					description
 					listTag
-					cartValue
+				}
+				cartProducts {
+					itemId
+					itemName
+					price
+					imgUrl
+					buyUrl
+					description
+					listTag
 				}
 			}
 		}
@@ -97,6 +105,16 @@ export const REMOVE_LIST_ITEM = gql`
 				buyUrl
 				description
 			}
+		}
+	}
+`;
+
+export const ADD_TO_CART = gql`
+	mutation addToCart($productData: SavedProduct) {
+		addToCart(productData: $productData) {
+			_id
+			username
+			email
 		}
 	}
 `;

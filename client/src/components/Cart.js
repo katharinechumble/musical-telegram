@@ -13,9 +13,7 @@ const Cart = () => {
 
 	useEffect(() => {
 		if (!loading && userData) {
-			let cartArr = userData.savedProducts.filter(
-				(item) => item.cartValue === true
-			);
+			let cartArr = userData.cartProducts;
 
 			console.log("cartArr: ", cartArr);
 			setCart(cartArr);

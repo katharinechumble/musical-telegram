@@ -61,7 +61,7 @@ const typeDefs = gql`
     createList(listName: String!): User
     removeProduct(productId: String!): User
     removeListItem(itemId: String!): User
-    addToCartItem(itemId: String!): User
+    addToCart(productData: SavedProduct): User
   }
 `;
 

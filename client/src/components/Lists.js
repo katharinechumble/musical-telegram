@@ -3,17 +3,16 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import Button from "@mui/material/Button";
 
-import { useQuery } from "@apollo/client";
-import { useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
+
 import { GET_ME } from "../utils/queries";
+import { ADD_TO_CART } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 import Grid from "@mui/material/Grid";
 import { ADD_TO_CART, REMOVE_LIST_ITEM } from "../utils/mutations";
 
 //addToCart Functionality global.
-let userItems;
-let cartArray = [];
 
 const Lists = () => {
   const { data, loading } = useQuery(GET_ME);
@@ -24,7 +23,6 @@ const Lists = () => {
   const [coWorker, setCoWorker] = useState([]);
 
   const [removeListItem] = useMutation(REMOVE_LIST_ITEM);
-  const [addToCartItem] = useMutation(ADD_TO_CART);
 
   useEffect(() => {
     if (!loading && userData) {
@@ -45,17 +43,42 @@ const Lists = () => {
     }
   }, [userData, loading]);
 
-  //getting the user's savedProducts and saving them to the global variable userItems.
-  userItems = userData.savedProducts;
+  const [addToCart] = useMutation(ADD_TO_CART);
   //Add To Cart functionality.
-  const handleAddToCart = async (itemId) => {
-    const productToCart = userItems.find((item) => item.itemId === itemId);
-    const cartProdName = productToCart.itemName;
-    const cartProdPrice = productToCart.price;
-    const cartProdId = productToCart.itemId;
+  const handleAddToCart = async (id) => {
+    const productToCart = userData.savedProducts.find(
+      (item) => item.itemId === id
+    );
+    console.log("productToCart: ", productToCart);
 
-    cartArray.push({ cartProdName, cartProdPrice, cartProdId });
-    console.log("cartArray: ", cartArray);
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    const { itemId, itemName, price, imgUrl, buyUrl, description, listTag } =
+      productToCart;
+
+    try {
+      const { data } = await addToCart({
+        variables: {
+          productData: {
+            itemId,
+            itemName,
+            price,
+            imgUrl,
+            buyUrl,
+            description,
+            listTag,
+          },
+        },
+      });
+      console.log("data: ", data);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   //remove list item functionality.
@@ -67,22 +90,6 @@ const Lists = () => {
     }
     try {
       const { data } = await removeListItem({
-        variables: { itemId },
-      });
-      console.log(data, itemId);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const addItemToCart = async (itemId) => {
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-    if (!token) {
-      return false;
-    }
-    try {
-      const { data } = await addToCartItem({
         variables: { itemId },
       });
       console.log(data, itemId);
@@ -117,7 +124,7 @@ const Lists = () => {
                         <Button
                           type="submit"
                           variant="contained"
-                          onClick={() => addItemToCart(item.itemId)}
+                          onClick={() => handleAddToCart(item.itemId)}
                         >
                           Add To Cart
                         </Button>

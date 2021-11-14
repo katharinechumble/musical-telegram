@@ -10,26 +10,11 @@ import Grid from "@mui/material/Grid";
 
 //addToCart Functionality.
 let userItems;
-
-const addToCart = () => {
-  console.log("You clicked the add to cart button");
-  console.log("listItemArr: ", userItems);
-  //Now that I'm getting all the items on the list page to the cartArray when hitting
-  //Add to Cart need to narrow it down so that it only adds the selected item to the cart array.
-  for (let i = 0; i < userItems.length; i++) {
-    console.log("userItems: ", userItems[i].itemName);
-  }
-};
+let cartArray = [];
 
 const Lists = () => {
   const { data, loading } = useQuery(GET_ME);
   const userData = data?.me || {};
-  //console.log("userData: ", userData);
-
-  //Trying to get the selected item from the list to the cartArray
-  //So that can be pushed to the eventual cart page.
-  userItems = userData.savedProducts;
-  console.log("userItems: ", userItems);
 
   const [family, setFamily] = useState([]);
   const [friends, setFriends] = useState([]);
@@ -54,10 +39,21 @@ const Lists = () => {
     }
   }, [userData, loading]);
 
+  userItems = userData.savedProducts;
+  //Add To Cart functionality.
+  const handleAddToCart = async (itemId) => {
+    const productToCart = userItems.find((item) => item.itemId === itemId);
+    const cartProdName = productToCart.itemName;
+    const cartProdPrice = productToCart.price;
+    const cartProdId = productToCart.itemId;
+
+    cartArray.push({ cartProdName, cartProdPrice, cartProdId });
+    console.log("cartArray: ", cartArray);
+  };
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
-  //   console.log("family: ", family);
 
   return (
     <>
@@ -81,7 +77,7 @@ const Lists = () => {
                         <Button
                           type="submit"
                           variant="contained"
-                          onClick={addToCart}
+                          onClick={() => handleAddToCart(item.itemId)}
                         >
                           Add To Cart
                         </Button>
@@ -113,7 +109,7 @@ const Lists = () => {
                         <Button
                           type="submit"
                           variant="contained"
-                          onClick={addToCart}
+                          onClick={() => handleAddToCart(item.itemId)}
                         >
                           Add To Cart
                         </Button>
@@ -145,7 +141,7 @@ const Lists = () => {
                         <Button
                           type="submit"
                           variant="contained"
-                          onClick={addToCart}
+                          onClick={() => handleAddToCart(item.itemId)}
                         >
                           Add To Cart
                         </Button>

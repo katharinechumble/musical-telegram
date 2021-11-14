@@ -84,6 +84,20 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+    //removeListItem resolver.
+    removeListItem: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedProducts: { itemId: args.itemId } } },
+          { new: true }
+        );
+
+        return updatedUser;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
 

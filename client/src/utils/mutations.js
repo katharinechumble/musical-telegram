@@ -82,13 +82,12 @@ export const REMOVE_PRODUCT = gql`
 `;
 
 export const REMOVE_LIST_ITEM = gql`
-  mutation removeListItem($itemId: ID!) {
+  mutation removeListItem($itemId: String!) {
     removeListItem(itemId: $itemId) {
       _id
       username
       email
       savedProducts {
-        # _id
         itemId
         itemName
         price

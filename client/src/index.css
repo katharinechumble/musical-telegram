@@ -1,3 +1,11 @@
+* {
+	box-sizing: border-box;
+}
+
+:root{
+
+}
+
 .login-style{
 	max-width: 500px;
 	padding: 10px 20px;

@@ -81,6 +81,25 @@ export const REMOVE_PRODUCT = gql`
   }
 `;
 
+export const REMOVE_LIST_ITEM = gql`
+  mutation removeListItem($itemId: ID!) {
+    removeListItem(itemId: $itemId) {
+      _id
+      username
+      email
+      savedProducts {
+        # _id
+        itemId
+        itemName
+        price
+        imgUrl
+        buyUrl
+        description
+      }
+    }
+  }
+`;
+
 // mutations for the list functions, will update once we've got those typeDefs settled.
 
 // export const SAVE_LIST = gql`

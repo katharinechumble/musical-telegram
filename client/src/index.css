@@ -1,0 +1,93 @@
+.login-style {
+	max-width: 500px;
+	padding: 10px 20px;
+	background: #f4f7f8;
+	margin: 10px auto;
+	padding: 20px;
+	background: #f4f7f8;
+	border-radius: 8px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+#signUp-alert {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: dotted red;
+}
+
+#login-alert {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: dotted red;
+}
+
+#login-alert button {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	color: black;
+	margin: 0 auto;
+	font-size: 16px;
+	text-align: center;
+	font-style: normal;
+	width: 50%;
+	margin-bottom: 10px;
+}
+
+.login-style label {
+	display: block;
+	margin-bottom: 8px;
+}
+
+.login-style input[type="text"],
+.login-style textarea,
+.login-style select {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	background: rgba(255, 255, 255, 0.1);
+	border: none;
+	border-radius: 4px;
+	font-size: 15px;
+	margin: 0;
+	outline: 0;
+	padding: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	background-color: #e8eeef;
+	color: #8a97a0;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+	margin-bottom: 30px;
+}
+.login-style input[type="text"]:focus,
+.login-style textarea:focus,
+.login-style select:focus {
+	background: #d2d9dd;
+}
+.login-style select {
+	-webkit-appearance: menulist-button;
+	height: 35px;
+}
+
+.login-style input[type="submit"],
+.login-style input[type="button"] {
+	position: relative;
+	display: block;
+	padding: 19px 39px 18px 39px;
+	color: #fff;
+	margin: 0 auto;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	width: 100%;
+	border-width: 1px 1px 3px;
+	margin-bottom: 10px;
+}
+
+.list-addtocart {
+	display: flex;
+	justify-content: space-evenly;
+	margin: 5px;
+}

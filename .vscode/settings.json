@@ -1,0 +1,12 @@
+{
+	"cSpell.words": [
+		"firstname",
+		"lastname"
+	],
+	"files.exclude": {
+		"": true
+	},
+	"search.exclude": {
+		"": true
+	}
+}

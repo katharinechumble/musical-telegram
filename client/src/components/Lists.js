@@ -8,7 +8,7 @@ import { GET_ME } from "../utils/queries";
 
 import Grid from "@mui/material/Grid";
 
-//addToCart Functionality.
+//addToCart Functionality global variables.
 let userItems;
 let cartArray = [];
 
@@ -39,6 +39,7 @@ const Lists = () => {
     }
   }, [userData, loading]);
 
+  //getting the user's savedProducts and saving them to the global variable userItems.
   userItems = userData.savedProducts;
   //Add To Cart functionality.
   const handleAddToCart = async (itemId) => {

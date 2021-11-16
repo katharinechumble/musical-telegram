@@ -7,6 +7,15 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import App from "./App";
 
+if ("serviceWorker" in navigator) {
+	window.addEventListener("load", () => {
+	  navigator.serviceWorker.register('/serviceworker.js')
+	  .then((reg) => {
+		console.log("service worker registered!", reg);
+	  });
+	});
+  }
+
 ReactDOM.render(
 	<React.StrictMode>
 		<App />

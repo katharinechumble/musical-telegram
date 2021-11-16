@@ -110,34 +110,32 @@ const Lists = () => {
 					{family
 						? family.map((item) => {
 								return (
-									<>
-										<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
-											<ProductCard
-												keyValue={item.itemId}
-												itemName={item.itemName}
-												buyUrl={item.buyUrl}
-												imgUrl={item.imgUrl}
-												price={item.price}
-												description={item.description}
-											/>
-											<div className="list-addtocart">
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => handleAddToCart(item.itemId)}
-												>
-													Add To Cart
-												</Button>
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => removeItem(item.itemId)}
-												>
-													Remove Item
-												</Button>
-											</div>
-										</Grid>
-									</>
+									<Grid key={item.itemName} item xs={12} sm={6} md={4} lg={3}>
+										<ProductCard
+											keyValue={item.itemId}
+											itemName={item.itemName}
+											buyUrl={item.buyUrl}
+											imgUrl={item.imgUrl}
+											price={item.price}
+											description={item.description}
+										/>
+										<div key={item.itemId} className="list-addtocart">
+											<Button
+												type="submit"
+												variant="contained"
+												onClick={() => handleAddToCart(item.itemId)}
+											>
+												Add To Cart
+											</Button>
+											<Button
+												type="submit"
+												variant="contained"
+												onClick={() => removeItem(item.itemId)}
+											>
+												Remove Item
+											</Button>
+										</div>
+									</Grid>
 								);
 						  })
 						: null}
@@ -149,34 +147,32 @@ const Lists = () => {
 					{friends
 						? friends.map((item) => {
 								return (
-									<>
-										<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
-											<ProductCard
-												keyValue={item.itemId}
-												itemName={item.itemName}
-												buyUrl={item.buyUrl}
-												imgUrl={item.imgUrl}
-												price={item.price}
-												description={item.description}
-											/>
-											<div className="list-addtocart">
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => handleAddToCart(item.itemId)}
-												>
-													Add To Cart
-												</Button>
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => removeItem(item.itemId)}
-												>
-													Remove Item
-												</Button>
-											</div>
-										</Grid>
-									</>
+									<Grid key={item.itemName} item xs={12} sm={6} md={4} lg={3}>
+										<ProductCard
+											keyValue={item.itemId}
+											itemName={item.itemName}
+											buyUrl={item.buyUrl}
+											imgUrl={item.imgUrl}
+											price={item.price}
+											description={item.description}
+										/>
+										<div key={item.itemId} className="list-addtocart">
+											<Button
+												type="submit"
+												variant="contained"
+												onClick={() => handleAddToCart(item.itemId)}
+											>
+												Add To Cart
+											</Button>
+											<Button
+												type="submit"
+												variant="contained"
+												onClick={() => removeItem(item.itemId)}
+											>
+												Remove Item
+											</Button>
+										</div>
+									</Grid>
 								);
 						  })
 						: null}
@@ -188,34 +184,32 @@ const Lists = () => {
 					{coWorker
 						? coWorker.map((item) => {
 								return (
-									<>
-										<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
-											<ProductCard
-												keyValue={item.itemId}
-												itemName={item.itemName}
-												buyUrl={item.buyUrl}
-												imgUrl={item.imgUrl}
-												price={item.price}
-												description={item.description}
-											/>
-											<div className="list-addtocart">
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => handleAddToCart(item.itemId)}
-												>
-													Add To Cart
-												</Button>
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => removeItem(item.itemId)}
-												>
-													Remove Item
-												</Button>
-											</div>
-										</Grid>
-									</>
+									<Grid key={item.itemName} item xs={12} sm={6} md={4} lg={3}>
+										<ProductCard
+											keyValue={item.itemId}
+											itemName={item.itemName}
+											buyUrl={item.buyUrl}
+											imgUrl={item.imgUrl}
+											price={item.price}
+											description={item.description}
+										/>
+										<div key={item.itemId} className="list-addtocart">
+											<Button
+												type="submit"
+												variant="contained"
+												onClick={() => handleAddToCart(item.itemId)}
+											>
+												Add To Cart
+											</Button>
+											<Button
+												type="submit"
+												variant="contained"
+												onClick={() => removeItem(item.itemId)}
+											>
+												Remove Item
+											</Button>
+										</div>
+									</Grid>
 								);
 						  })
 						: null}

@@ -108,7 +108,10 @@ const ProductCard = (props) => {
 	// @ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	return (
 		<>
-			<Card sx={{ maxWidth: 345 }} key={props.keyValue}>
+			<Card
+				sx={{ maxWidth: 345, border: ".15rem solid lightgrey" }}
+				key={props.keyValue}
+			>
 				<CardMedia
 					component="img"
 					height="300"

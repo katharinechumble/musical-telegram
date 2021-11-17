@@ -33,183 +33,199 @@ const style = {
 };
 
 const ProductCard = (props) => {
-	// * Items State
-	const [searchResults] = useState(props.searchResults);
-	const [selectedItem, setSelectedItem] = useState("");
-	const [radioValue, setRadioValue] = useState("family");
+  // * Items State
+  const [searchResults] = useState(props.searchResults);
+  const [selectedItem, setSelectedItem] = useState("");
+  const [radioValue, setRadioValue] = useState("family");
 
-	// * Modal State
-	const [open, setOpen] = useState(false);
-	const handleOpen = (event) => {
-		event.preventDefault();
-		setOpen(true);
+  // * Modal State
+  const [open, setOpen] = useState(false);
+  const handleOpen = (event) => {
+    event.preventDefault();
+    setOpen(true);
 
-		const productId = event.target.id;
-		setSelectedItem(productId);
-	};
-	const handleClose = (event) => {
-		event.preventDefault();
-		setOpen(false);
-	};
+    const productId = event.target.id;
+    setSelectedItem(productId);
+  };
+  const handleClose = (event) => {
+    event.preventDefault();
+    setOpen(false);
+  };
 
-	// * Mutation
-	const [saveProduct] = useMutation(SAVE_PRODUCT);
+  // * Mutation
+  const [saveProduct] = useMutation(SAVE_PRODUCT);
 
-	// * Handlers
-	const handleSaveProduct = async (id) => {
-		const productToSave = await searchResults.find(
-			(product) => product.itemId === id
-		);
+  // * Handlers
+  const handleSaveProduct = async (id) => {
+    const productToSave = await searchResults.find(
+      (product) => product.itemId === id
+    );
 
-		const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-		if (!token) {
-			return false;
-		}
+    if (!token) {
+      return false;
+    }
 
-		try {
-			const { data } = await saveProduct({
-				variables: {
-					productData: {
-						...productToSave,
-						listTag: radioValue,
-						cartValue: false,
-					},
-				},
-			});
+    try {
+      const { data } = await saveProduct({
+        variables: {
+          productData: {
+            ...productToSave,
+            listTag: radioValue,
+            cartValue: false,
+          },
+        },
+      });
 
-			return data;
-		} catch (err) {
-			console.log(err);
-		}
-	};
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-	const handleRadioChange = (event) => {
-		event.preventDefault();
+  const handleRadioChange = (event) => {
+    event.preventDefault();
 
-		setRadioValue(event.target.value);
-	};
+    setRadioValue(event.target.value);
+  };
 
-	// * Name Util
+  // * Name Util
 
-	const nameSplit = props.itemName.split("-");
-	const cleanedName = nameSplit[0].trim();
+  const nameSplit = props.itemName.split("-");
+  const cleanedName = nameSplit[0].trim();
 
-	// * Location Util
-	const getLocation = () => {
-		const location = window.location.pathname;
+  // * Location Util
+  const getLocation = () => {
+    const location = window.location.pathname;
 
-		if (location === "/lists") {
-			return true;
-		} else {
-			return false;
-		}
-	};
+    if (location === "/lists") {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
-	// @ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	return (
-		<>
-			<Card sx={{ maxWidth: 345 }} key={props.keyValue}>
-				<CardMedia
-					component="img"
-					height="300"
-					image={props.imgUrl}
-					alt="product"
-				/>
-				<CardContent>
-					<Typography gutterBottom variant="h5" component="div">
-						{cleanedName}
-					</Typography>
-					<Typography gutterBottom variant="subtitle1" component="div">
-						{props.price}
-					</Typography>
+  // @ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  return (
+    <>
+      <Card sx={{ maxWidth: 345 }} key={props.keyValue}>
+        <CardMedia
+          component="img"
+          height="300"
+          image={props.imgUrl}
+          alt="product"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {cleanedName}
+          </Typography>
+          <Typography gutterBottom variant="subtitle1" component="div">
+            {props.price}
+          </Typography>
 
-					{props.description.map((i) => {
-						return (
-							<Typography
-								key={i}
-								gutterBottom
-								component="div"
-								variant="caption"
-							>
-								-{i}
-							</Typography>
-						);
-					})}
-				</CardContent>
-				<CardActions
-					sx={{
-						display: "flex",
-						justifyContent: "space-around",
-					}}
-				>
-					{getLocation() ? null : (
-						<Button
-							onClick={handleOpen}
-							variant="contained"
-							size="small"
-							id={props.keyValue}
-						>
-							Add to List
-						</Button>
-					)}
-					<a
-						href={props.buyUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-						style={{ textDecoration: "none" }}
-					>
-						<Button size="small">Learn More</Button>
-					</a>
-				</CardActions>
-			</Card>
+          {props.description.map((i) => {
+            return (
+              <Typography
+                key={i}
+                gutterBottom
+                component="div"
+                variant="caption"
+              >
+                -{i}
+              </Typography>
+            );
+          })}
+        </CardContent>
+        <CardActions
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+          }}
+        >
+          {getLocation() ? null : (
+            <Button
+              onClick={handleOpen}
+              variant="contained"
+              size="small"
+              sx={{
+                backgroundColor: "#A5D8F3",
+                color: "#072636",
+              }}
+              id={props.keyValue}
+            >
+              Add to List
+            </Button>
+          )}
+          <a
+            href={props.buyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none" }}
+          >
+            <Button sx={{
+              backgroundColor: "#A5D8F3",
+              color: "#072636",
+            }}
+            size="small">Learn More</Button>
+          </a>
+        </CardActions>
+      </Card>
 
-			<div>
-				<Modal
-					open={open}
-					onClose={handleClose}
-					aria-labelledby="modal-modal-title"
-					aria-describedby="modal-modal-description"
-				>
-					<Box sx={style}>
-						<Typography id="modal-modal-title" variant="h6" component="h2">
-							What List Would You Like to Add To?
-						</Typography>
-						<form onSubmit={() => handleSaveProduct(selectedItem)}>
-							<FormControl component="fieldset">
-								<FormLabel component="legend">List</FormLabel>
-								<RadioGroup
-									aria-label="List"
-									defaultValue="family"
-									name="radio-buttons-group"
-									onChange={handleRadioChange}
-								>
-									<FormControlLabel
-										value="family"
-										control={<Radio />}
-										label="Family"
-									/>
-									<FormControlLabel
-										value="friends"
-										control={<Radio />}
-										label="Friends"
-									/>
-									<FormControlLabel
-										value="co-workers"
-										control={<Radio />}
-										label="Co-Workers"
-									/>
-								</RadioGroup>
-								<Button type="submit" variant="contained" size="small">
-									Add to List
-								</Button>
-							</FormControl>
-						</form>
-					</Box>
-				</Modal>
-			</div>
-		</>
-	);
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              What List Would You Like to Add To?
+            </Typography>
+            <form onSubmit={() => handleSaveProduct(selectedItem)}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">List</FormLabel>
+                <RadioGroup
+                  aria-label="List"
+                  defaultValue="family"
+                  name="radio-buttons-group"
+                  onChange={handleRadioChange}
+                >
+                  <FormControlLabel
+                    value="family"
+                    control={<Radio />}
+                    label="Family"
+                  />
+                  <FormControlLabel
+                    value="friends"
+                    control={<Radio />}
+                    label="Friends"
+                  />
+                  <FormControlLabel
+                    value="co-workers"
+                    control={<Radio />}
+                    label="Co-Workers"
+                  />
+                </RadioGroup>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#A5D8F3",
+                    color: "#072636",
+                  }}
+                  size="small"
+                >
+                  Add to List
+                </Button>
+              </FormControl>
+            </form>
+          </Box>
+        </Modal>
+      </div>
+    </>
+  );
 };
 
 export default ProductCard;

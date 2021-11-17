@@ -240,6 +240,10 @@ const Lists = () => {
 												<Button
 													type="submit"
 													variant="contained"
+													sx={{
+														backgroundColor: "#A5D8F3",
+														color: "#072636",
+													  }}
 													onClick={() => handleAddToCart(item.itemId)}
 												>
 													Add To Cart

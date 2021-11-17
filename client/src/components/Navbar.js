@@ -11,7 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Paper from "@mui/material/Paper";
 import ReorderIcon from "@mui/icons-material/Reorder";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 // import Auth from "../utils/auth";
 
@@ -39,7 +39,7 @@ const NavBar = () => {
 					{/* Cart */}
 					{Auth.loggedIn() ? (
 						<BottomNavigationAction
-							onClick={() => window.location.assign("/cart")}
+							onClick={() => history.push("/cart")}
 							label="Cart"
 							icon={<ShoppingCartIcon />}
 						/>

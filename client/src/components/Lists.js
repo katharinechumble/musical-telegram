@@ -29,31 +29,24 @@ const Lists = () => {
       let familyArr = userData.savedProducts.filter(
         (item) => item.listTag[0] === "family"
       );
+
       setFamily(familyArr);
-
-      //for loop through the family array and pull the price values:
-
-      let famPriceArr = [];
-      for (let i = 0; i < familyArr.length; i++) {
-        let famItemPrice = familyArr[i].price;
-        console.log("famItemPrice: ", famItemPrice);
-        console.log("famPriceArr: ", famPriceArr);
-        famPriceArr.push(famItemPrice);
-      }
 
       let friendArr = userData.savedProducts.filter(
         (item) => item.listTag[0] === "friends"
       );
+
       setFriends(friendArr);
 
       let coWorkerArr = userData.savedProducts.filter(
         (item) => item.listTag[0] === "co-workers"
       );
+
       setCoWorker(coWorkerArr);
     }
   }, [userData, loading]);
 
-  const [addToCart] = useMutation(ADD_TO_CART);
+  const [cartToTrue] = useMutation(ADD_TO_CART);
   //Add To Cart functionality.
   const handleAddToCart = async (id) => {
     const productToCart = userData.savedProducts.find(
@@ -66,21 +59,13 @@ const Lists = () => {
       return false;
     }
 
-    const { itemId, itemName, price, imgUrl, buyUrl, description, listTag } =
-      productToCart;
+    const cartToggle = !productToCart.cartValue;
 
     try {
-      const { data } = await addToCart({
+      const { data } = await cartToTrue({
         variables: {
-          productData: {
-            itemId,
-            itemName,
-            price,
-            imgUrl,
-            buyUrl,
-            description,
-            listTag,
-          },
+          itemId: productToCart.itemId,
+          cartBool: cartToggle,
         },
       });
 
@@ -114,7 +99,6 @@ const Lists = () => {
     <>
       <div>
         <h1>Family</h1>
-        <h2>Family Total:</h2>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           {family
             ? family.map((item) => {
@@ -129,24 +113,28 @@ const Lists = () => {
                       description={item.description}
                     />
                     <div key={item.itemId} className="list-addtocart">
+                      {item.cartValue ? (
+                        <Button
+                          disabled
+                          type="submit"
+                          variant="contained"
+                          // onClick={() => handleAddToCart(item.itemId)}
+                        >
+                          In Cart
+                        </Button>
+                      ) : (
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          onClick={() => handleAddToCart(item.itemId)}
+                        >
+                          Add To Cart
+                        </Button>
+                      )}
+
                       <Button
                         type="submit"
                         variant="contained"
-                        sx={{
-                          backgroundColor: "#A5D8F3",
-                          color: "#072636",
-                        }}
-                        onClick={() => handleAddToCart(item.itemId)}
-                      >
-                        Add To Cart
-                      </Button>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        sx={{
-                          backgroundColor: "#A5D8F3",
-                          color: "#072636",
-                        }}
                         onClick={() => removeItem(item.itemId)}
                       >
                         Remove Item
@@ -160,7 +148,6 @@ const Lists = () => {
       </div>
       <div>
         <h1>Friends</h1>
-        <h2>Friends Total:</h2>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           {friends
             ? friends.map((item) => {
@@ -175,24 +162,28 @@ const Lists = () => {
                       description={item.description}
                     />
                     <div key={item.itemId} className="list-addtocart">
+                      {item.cartValue ? (
+                        <Button
+                          disabled
+                          type="submit"
+                          variant="contained"
+                          // onClick={() => handleAddToCart(item.itemId)}
+                        >
+                          In Cart
+                        </Button>
+                      ) : (
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          onClick={() => handleAddToCart(item.itemId)}
+                        >
+                          Add To Cart
+                        </Button>
+                      )}
+
                       <Button
                         type="submit"
                         variant="contained"
-                        sx={{
-                          backgroundColor: "#A5D8F3",
-                          color: "#072636",
-                        }}
-                        onClick={() => handleAddToCart(item.itemId)}
-                      >
-                        Add To Cart
-                      </Button>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        sx={{
-                          backgroundColor: "#A5D8F3",
-                          color: "#072636",
-                        }}
                         onClick={() => removeItem(item.itemId)}
                       >
                         Remove Item
@@ -206,7 +197,6 @@ const Lists = () => {
       </div>
       <div>
         <h1>Co-Workers</h1>
-        <h2>Co-Workers Total:</h2>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           {coWorker
             ? coWorker.map((item) => {
@@ -221,24 +211,28 @@ const Lists = () => {
                       description={item.description}
                     />
                     <div key={item.itemId} className="list-addtocart">
+                      {item.cartValue ? (
+                        <Button
+                          disabled
+                          type="submit"
+                          variant="contained"
+                          // onClick={() => handleAddToCart(item.itemId)}
+                        >
+                          In Cart
+                        </Button>
+                      ) : (
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          onClick={() => handleAddToCart(item.itemId)}
+                        >
+                          Add To Cart
+                        </Button>
+                      )}
+
                       <Button
                         type="submit"
                         variant="contained"
-                        sx={{
-                          backgroundColor: "#A5D8F3",
-                          color: "#072636",
-                        }}
-                        onClick={() => handleAddToCart(item.itemId)}
-                      >
-                        Add To Cart
-                      </Button>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        sx={{
-                          backgroundColor: "#A5D8F3",
-                          color: "#072636",
-                        }}
                         onClick={() => removeItem(item.itemId)}
                       >
                         Remove Item

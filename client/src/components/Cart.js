@@ -9,12 +9,11 @@ const Cart = () => {
   const { data, loading } = useQuery(GET_ME);
   const userData = data?.me || {};
 
-  console.log("data: ", data);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
     if (!loading && userData) {
-      let cartArr = userData.cartProducts;
+      let cartArr = userData.savedProducts.filter((item) => item.cartValue);
       setCart(cartArr);
     }
   }, [userData, loading]);
@@ -23,19 +22,6 @@ const Cart = () => {
     return (
       <Typography variant="h2" gutterBottom component="div">
         Loading...
-      </Typography>
-    );
-  }
-
-  if (!data.me.cartProducts.length) {
-    return (
-      <Typography
-        variant="h2"
-        sx={{ padding: "1rem" }}
-        gutterBottom
-        component="div"
-      >
-        Your Cart Is Empty!!!
       </Typography>
     );
   }

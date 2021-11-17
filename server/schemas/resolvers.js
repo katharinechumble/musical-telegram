@@ -127,6 +127,25 @@ const resolvers = {
 
 			throw new AuthenticationError("You need to be logged in!");
 		},
+		cartToTrue: async (parent, args, context) => {
+			if (context.user) {
+				const updatedUser = await User.findOneAndUpdate(
+					{
+						_id: context.user._id,
+						"savedProducts.itemId": args.itemId,
+					},
+					{
+						$set: {
+							"savedProducts.$.cartValue": args.cartBool,
+						},
+					},
+					{ new: true }
+				);
+
+				return updatedUser;
+			}
+			throw new AuthenticationError("You need to be logged in!");
+		},
 	},
 };
 

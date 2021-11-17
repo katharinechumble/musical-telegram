@@ -1,14 +1,3 @@
-<style type="text/css" rel="stylesheet">
-
-section{
-    display: flex
-}
-
-.ml{
-    margin-left: 2rem
-}
-</style>
-
 # Holiday Chaos Coordinator
 
 ## About

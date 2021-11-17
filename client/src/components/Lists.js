@@ -29,6 +29,7 @@ const Lists = () => {
 			let familyArr = userData.savedProducts.filter(
 				(item) => item.listTag[0] === "family"
 			);
+
 			setFamily(familyArr);
 
 			let friendArr = userData.savedProducts.filter(
@@ -43,7 +44,7 @@ const Lists = () => {
 		}
 	}, [userData, loading]);
 
-	const [addToCart] = useMutation(ADD_TO_CART);
+	const [cartToTrue] = useMutation(ADD_TO_CART);
 	//Add To Cart functionality.
 	const handleAddToCart = async (id) => {
 		const productToCart = userData.savedProducts.find(
@@ -56,24 +57,15 @@ const Lists = () => {
 			return false;
 		}
 
-		const { itemId, itemName, price, imgUrl, buyUrl, description, listTag } =
-			productToCart;
+		const cartToggle = !productToCart.cartValue;
 
 		try {
-			const { data } = await addToCart({
+			const { data } = await cartToTrue({
 				variables: {
-					productData: {
-						itemId,
-						itemName,
-						price,
-						imgUrl,
-						buyUrl,
-						description,
-						listTag,
-					},
+					itemId: productToCart.itemId,
+					cartBool: cartToggle,
 				},
 			});
-
 			return data;
 		} catch (err) {
 			console.log(err);
@@ -118,12 +110,31 @@ const Lists = () => {
 											description={item.description}
 										/>
 										<div key={item.itemId} className="list-addtocart">
+											{item.cartValue ? (
+												<Button
+													disabled
+													type="submit"
+													variant="contained"
+													// onClick={() => handleAddToCart(item.itemId)}
+												>
+													In Cart
+												</Button>
+											) : (
+												<Button
+													type="submit"
+													variant="contained"
+													onClick={() => handleAddToCart(item.itemId)}
+												>
+													Add To Cart
+												</Button>
+											)}
+
 											<Button
 												type="submit"
 												variant="contained"
-												onClick={() => handleAddToCart(item.itemId)}
+												onClick={() => removeItem(item.itemId)}
 											>
-												Add To Cart
+												Remove Item
 											</Button>
 										</div>
 									</Grid>

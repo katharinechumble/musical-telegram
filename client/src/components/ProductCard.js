@@ -73,6 +73,7 @@ const ProductCard = (props) => {
 					productData: {
 						...productToSave,
 						listTag: radioValue,
+						cartValue: false,
 					},
 				},
 			});

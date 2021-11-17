@@ -24,38 +24,11 @@ const Lists = () => {
 
   const [removeListItem] = useMutation(REMOVE_LIST_ITEM);
 
-  let famItemPrice;
-  let famItemPriceArr = [];
-  let friendItemPriceArr;
-  let cowoItemPriceArr;
-
   useEffect(() => {
     if (!loading && userData) {
       let familyArr = userData.savedProducts.filter(
         (item) => item.listTag[0] === "family"
       );
-      //pulling the price data from the familyArr.
-      for (let i = 0; i < familyArr.length; i++) {
-        if (familyArr) {
-          famItemPrice = familyArr[i].price;
-
-          console.log("famItemPrice: ", famItemPrice);
-          //pushing the fam item prices to the famItemPriceArr.
-          famItemPriceArr.push(famItemPrice);
-        }
-      }
-
-      console.log("famItemPriceArr: ", famItemPriceArr);
-      //functionality to add up the items in the famItemPriceArr:
-
-      //convert the string price to an integer:
-
-      let famItemPriceTotal = famItemPriceArr.reduce(getSum, 0);
-
-      function getSum(total, num) {
-        return total + num;
-      }
-      console.log("famItemPriceTotal: ", famItemPriceTotal);
 
       setFamily(familyArr);
 
@@ -145,6 +118,10 @@ const Lists = () => {
                           disabled
                           type="submit"
                           variant="contained"
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
                           // onClick={() => handleAddToCart(item.itemId)}
                         >
                           In Cart
@@ -154,6 +131,10 @@ const Lists = () => {
                           type="submit"
                           variant="contained"
                           onClick={() => handleAddToCart(item.itemId)}
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
                         >
                           Add To Cart
                         </Button>
@@ -195,6 +176,10 @@ const Lists = () => {
                           type="submit"
                           variant="contained"
                           // onClick={() => handleAddToCart(item.itemId)}
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
                         >
                           In Cart
                         </Button>
@@ -243,6 +228,10 @@ const Lists = () => {
                           disabled
                           type="submit"
                           variant="contained"
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
                           // onClick={() => handleAddToCart(item.itemId)}
                         >
                           In Cart
@@ -251,6 +240,10 @@ const Lists = () => {
                         <Button
                           type="submit"
                           variant="contained"
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
                           onClick={() => handleAddToCart(item.itemId)}
                         >
                           Add To Cart

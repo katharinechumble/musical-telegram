@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 // import Auth from "../utils/auth";
 
 const NavBar = () => {
-	const history = useHistory();
+  const history = useHistory();
 
 	return (
 		<>
@@ -54,24 +54,28 @@ const NavBar = () => {
 					)}
 					{/* Log Out */}
 
-					{Auth.loggedIn() ? (
-						<BottomNavigationAction
-							onClick={() => Auth.logout()}
-							label="Logout"
-							icon={<LogoutIcon />}
-						/>
-					) : (
-						// Log In
-						<BottomNavigationAction
-							onClick={() => history.push("/login")}
-							label="Login"
-							icon={<LoginIcon />}
-						/>
-					)}
-				</BottomNavigation>
-			</Paper>
-		</>
-	);
+          {Auth.loggedIn() ? (
+            <BottomNavigationAction
+              sx={{
+                backgroundColor: "#A5D8F3",
+                color: "#072636",
+              }}
+              onClick={() => Auth.logout()}
+              label="Logout"
+              icon={<LogoutIcon />}
+            />
+          ) : (
+            // Log In
+            <BottomNavigationAction
+              onClick={() => history.push("/login")}
+              label="Login"
+              icon={<LoginIcon />}
+            />
+          )}
+        </BottomNavigation>
+      </Paper>
+    </>
+  );
 };
 
 export default NavBar;

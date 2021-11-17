@@ -73,10 +73,11 @@ const ProductCard = (props) => {
 					productData: {
 						...productToSave,
 						listTag: radioValue,
+						cartValue: false,
 					},
 				},
 			});
-			console.log("data: ", data);
+
 			return data;
 		} catch (err) {
 			console.log(err);
@@ -93,6 +94,17 @@ const ProductCard = (props) => {
 
 	const nameSplit = props.itemName.split("-");
 	const cleanedName = nameSplit[0].trim();
+
+	// * Location Util
+	const getLocation = () => {
+		const location = window.location.pathname;
+
+		if (location === "/lists") {
+			return true;
+		} else {
+			return false;
+		}
+	};
 
 	// @ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	return (
@@ -131,14 +143,16 @@ const ProductCard = (props) => {
 						justifyContent: "space-around",
 					}}
 				>
-					<Button
-						onClick={handleOpen}
-						variant="contained"
-						size="small"
-						id={props.keyValue}
-					>
-						Add to List
-					</Button>
+					{getLocation() ? null : (
+						<Button
+							onClick={handleOpen}
+							variant="contained"
+							size="small"
+							id={props.keyValue}
+						>
+							Add to List
+						</Button>
+					)}
 					<a
 						href={props.buyUrl}
 						target="_blank"

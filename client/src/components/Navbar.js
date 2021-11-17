@@ -37,11 +37,13 @@ const NavBar = () => {
 						/>
 					) : null}
 					{/* Cart */}
-					<BottomNavigationAction
-						onClick={() => history.push("/cart")}
-						label="Cart"
-						icon={<ShoppingCartIcon />}
-					/>
+					{Auth.loggedIn() ? (
+						<BottomNavigationAction
+							onClick={() => history.push("/cart")}
+							label="Cart"
+							icon={<ShoppingCartIcon />}
+						/>
+					) : null}
 					{/* Sign Up */}
 					{Auth.loggedIn() ? null : (
 						<BottomNavigationAction

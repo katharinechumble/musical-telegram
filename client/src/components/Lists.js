@@ -29,27 +29,29 @@ const Lists = () => {
 			let familyArr = userData.savedProducts.filter(
 				(item) => item.listTag[0] === "family"
 			);
+
 			setFamily(familyArr);
 
 			let friendArr = userData.savedProducts.filter(
 				(item) => item.listTag[0] === "friends"
 			);
+
 			setFriends(friendArr);
 
 			let coWorkerArr = userData.savedProducts.filter(
 				(item) => item.listTag[0] === "co-workers"
 			);
+
 			setCoWorker(coWorkerArr);
 		}
 	}, [userData, loading]);
 
-	const [addToCart] = useMutation(ADD_TO_CART);
+	const [cartToTrue] = useMutation(ADD_TO_CART);
 	//Add To Cart functionality.
 	const handleAddToCart = async (id) => {
 		const productToCart = userData.savedProducts.find(
 			(item) => item.itemId === id
 		);
-		console.log("productToCart: ", productToCart);
 
 		const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -57,24 +59,16 @@ const Lists = () => {
 			return false;
 		}
 
-		const { itemId, itemName, price, imgUrl, buyUrl, description, listTag } =
-			productToCart;
+		const cartToggle = !productToCart.cartValue;
 
 		try {
-			const { data } = await addToCart({
+			const { data } = await cartToTrue({
 				variables: {
-					productData: {
-						itemId,
-						itemName,
-						price,
-						imgUrl,
-						buyUrl,
-						description,
-						listTag,
-					},
+					itemId: productToCart.itemId,
+					cartBool: cartToggle,
 				},
 			});
-			console.log("data: ", data);
+
 			return data;
 		} catch (err) {
 			console.log(err);
@@ -92,7 +86,6 @@ const Lists = () => {
 			const { data } = await removeListItem({
 				variables: { itemId },
 			});
-			console.log(data, itemId);
 		} catch (err) {
 			console.error(err);
 		}
@@ -110,17 +103,26 @@ const Lists = () => {
 					{family
 						? family.map((item) => {
 								return (
-									<>
-										<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
-											<ProductCard
-												keyValue={item.itemId}
-												itemName={item.itemName}
-												buyUrl={item.buyUrl}
-												imgUrl={item.imgUrl}
-												price={item.price}
-												description={item.description}
-											/>
-											<div className="list-addtocart">
+									<Grid key={item.itemName} item xs={12} sm={6} md={4} lg={3}>
+										<ProductCard
+											keyValue={item.itemId}
+											itemName={item.itemName}
+											buyUrl={item.buyUrl}
+											imgUrl={item.imgUrl}
+											price={item.price}
+											description={item.description}
+										/>
+										<div key={item.itemId} className="list-addtocart">
+											{item.cartValue ? (
+												<Button
+													disabled
+													type="submit"
+													variant="contained"
+													// onClick={() => handleAddToCart(item.itemId)}
+												>
+													In Cart
+												</Button>
+											) : (
 												<Button
 													type="submit"
 													variant="contained"
@@ -128,16 +130,17 @@ const Lists = () => {
 												>
 													Add To Cart
 												</Button>
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => removeItem(item.itemId)}
-												>
-													Remove Item
-												</Button>
-											</div>
-										</Grid>
-									</>
+											)}
+
+											<Button
+												type="submit"
+												variant="contained"
+												onClick={() => removeItem(item.itemId)}
+											>
+												Remove Item
+											</Button>
+										</div>
+									</Grid>
 								);
 						  })
 						: null}
@@ -149,17 +152,26 @@ const Lists = () => {
 					{friends
 						? friends.map((item) => {
 								return (
-									<>
-										<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
-											<ProductCard
-												keyValue={item.itemId}
-												itemName={item.itemName}
-												buyUrl={item.buyUrl}
-												imgUrl={item.imgUrl}
-												price={item.price}
-												description={item.description}
-											/>
-											<div className="list-addtocart">
+									<Grid key={item.itemName} item xs={12} sm={6} md={4} lg={3}>
+										<ProductCard
+											keyValue={item.itemId}
+											itemName={item.itemName}
+											buyUrl={item.buyUrl}
+											imgUrl={item.imgUrl}
+											price={item.price}
+											description={item.description}
+										/>
+										<div key={item.itemId} className="list-addtocart">
+											{item.cartValue ? (
+												<Button
+													disabled
+													type="submit"
+													variant="contained"
+													// onClick={() => handleAddToCart(item.itemId)}
+												>
+													In Cart
+												</Button>
+											) : (
 												<Button
 													type="submit"
 													variant="contained"
@@ -167,16 +179,17 @@ const Lists = () => {
 												>
 													Add To Cart
 												</Button>
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => removeItem(item.itemId)}
-												>
-													Remove Item
-												</Button>
-											</div>
-										</Grid>
-									</>
+											)}
+
+											<Button
+												type="submit"
+												variant="contained"
+												onClick={() => removeItem(item.itemId)}
+											>
+												Remove Item
+											</Button>
+										</div>
+									</Grid>
 								);
 						  })
 						: null}
@@ -188,17 +201,26 @@ const Lists = () => {
 					{coWorker
 						? coWorker.map((item) => {
 								return (
-									<>
-										<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
-											<ProductCard
-												keyValue={item.itemId}
-												itemName={item.itemName}
-												buyUrl={item.buyUrl}
-												imgUrl={item.imgUrl}
-												price={item.price}
-												description={item.description}
-											/>
-											<div className="list-addtocart">
+									<Grid key={item.itemName} item xs={12} sm={6} md={4} lg={3}>
+										<ProductCard
+											keyValue={item.itemId}
+											itemName={item.itemName}
+											buyUrl={item.buyUrl}
+											imgUrl={item.imgUrl}
+											price={item.price}
+											description={item.description}
+										/>
+										<div key={item.itemId} className="list-addtocart">
+											{item.cartValue ? (
+												<Button
+													disabled
+													type="submit"
+													variant="contained"
+													// onClick={() => handleAddToCart(item.itemId)}
+												>
+													In Cart
+												</Button>
+											) : (
 												<Button
 													type="submit"
 													variant="contained"
@@ -206,16 +228,17 @@ const Lists = () => {
 												>
 													Add To Cart
 												</Button>
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => removeItem(item.itemId)}
-												>
-													Remove Item
-												</Button>
-											</div>
-										</Grid>
-									</>
+											)}
+
+											<Button
+												type="submit"
+												variant="contained"
+												onClick={() => removeItem(item.itemId)}
+											>
+												Remove Item
+											</Button>
+										</div>
+									</Grid>
 								);
 						  })
 						: null}

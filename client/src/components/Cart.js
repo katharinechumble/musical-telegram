@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+//still trying to fix heroku
 
 import { useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
@@ -24,6 +25,10 @@ const Cart = () => {
         Loading...
       </Typography>
     );
+  }
+
+  if (!cart.items.length) {
+    <Typography>No Items In Cart!</Typography>;
   }
 
   return (

@@ -39,7 +39,7 @@ const NavBar = () => {
 					{/* Cart */}
 					{Auth.loggedIn() ? (
 						<BottomNavigationAction
-							onClick={() => window.location.assign("/cart")}
+							onClick={() => history.push("/cart")}
 							label="Cart"
 							icon={<ShoppingCartIcon />}
 						/>

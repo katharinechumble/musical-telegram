@@ -35,11 +35,13 @@ const Lists = () => {
 			let friendArr = userData.savedProducts.filter(
 				(item) => item.listTag[0] === "friends"
 			);
+
 			setFriends(friendArr);
 
 			let coWorkerArr = userData.savedProducts.filter(
 				(item) => item.listTag[0] === "co-workers"
 			);
+
 			setCoWorker(coWorkerArr);
 		}
 	}, [userData, loading]);
@@ -66,6 +68,7 @@ const Lists = () => {
 					cartBool: cartToggle,
 				},
 			});
+
 			return data;
 		} catch (err) {
 			console.log(err);
@@ -159,13 +162,25 @@ const Lists = () => {
 											description={item.description}
 										/>
 										<div key={item.itemId} className="list-addtocart">
-											<Button
-												type="submit"
-												variant="contained"
-												onClick={() => handleAddToCart(item.itemId)}
-											>
-												Add To Cart
-											</Button>
+											{item.cartValue ? (
+												<Button
+													disabled
+													type="submit"
+													variant="contained"
+													// onClick={() => handleAddToCart(item.itemId)}
+												>
+													In Cart
+												</Button>
+											) : (
+												<Button
+													type="submit"
+													variant="contained"
+													onClick={() => handleAddToCart(item.itemId)}
+												>
+													Add To Cart
+												</Button>
+											)}
+
 											<Button
 												type="submit"
 												variant="contained"
@@ -196,13 +211,25 @@ const Lists = () => {
 											description={item.description}
 										/>
 										<div key={item.itemId} className="list-addtocart">
-											<Button
-												type="submit"
-												variant="contained"
-												onClick={() => handleAddToCart(item.itemId)}
-											>
-												Add To Cart
-											</Button>
+											{item.cartValue ? (
+												<Button
+													disabled
+													type="submit"
+													variant="contained"
+													// onClick={() => handleAddToCart(item.itemId)}
+												>
+													In Cart
+												</Button>
+											) : (
+												<Button
+													type="submit"
+													variant="contained"
+													onClick={() => handleAddToCart(item.itemId)}
+												>
+													Add To Cart
+												</Button>
+											)}
+
 											<Button
 												type="submit"
 												variant="contained"

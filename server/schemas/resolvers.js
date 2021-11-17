@@ -128,7 +128,6 @@ const resolvers = {
 			throw new AuthenticationError("You need to be logged in!");
 		},
 		cartToTrue: async (parent, args, context) => {
-			console.log("args: ", args);
 			if (context.user) {
 				const updatedUser = await User.findOneAndUpdate(
 					{
@@ -142,7 +141,7 @@ const resolvers = {
 					},
 					{ new: true }
 				);
-				console.log("updatedUser: ", updatedUser);
+
 				return updatedUser;
 			}
 			throw new AuthenticationError("You need to be logged in!");

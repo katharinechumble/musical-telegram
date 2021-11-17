@@ -9,12 +9,11 @@ const Cart = () => {
 	const { data, loading } = useQuery(GET_ME);
 	const userData = data?.me || {};
 
-	console.log("data: ", data);
 	const [cart, setCart] = useState([]);
 
 	useEffect(() => {
 		if (!loading && userData) {
-			let cartArr = userData.cartProducts;
+			let cartArr = userData.savedProducts.filter((item) => item.cartValue);
 			setCart(cartArr);
 		}
 	}, [userData, loading]);

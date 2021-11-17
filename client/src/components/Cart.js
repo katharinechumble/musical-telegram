@@ -10,6 +10,8 @@ const Cart = () => {
   const { data, loading } = useQuery(GET_ME);
   const userData = data?.me || {};
 
+  console.log(userData);
+
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -27,8 +29,14 @@ const Cart = () => {
     );
   }
 
-  if (!cart.items.length) {
-    <Typography>No Items In Cart!</Typography>;
+  for (let i = 0; i < userData.savedProducts.length; i++) {
+    if (!userData.savedProducts[i].cartValue === true) {
+      return (
+        <Typography variant="h2" gutterBottom component="div">
+          No items in Cart!
+        </Typography>
+      );
+    }
   }
 
   return (

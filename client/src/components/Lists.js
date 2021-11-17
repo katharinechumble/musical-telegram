@@ -12,7 +12,7 @@ import Auth from "../utils/auth";
 import Grid from "@mui/material/Grid";
 import { REMOVE_LIST_ITEM } from "../utils/mutations";
 
-//addToCart Functionality global.
+//addToCart Functionality global
 
 const Lists = () => {
   const { data, loading } = useQuery(GET_ME);
@@ -30,6 +30,16 @@ const Lists = () => {
         (item) => item.listTag[0] === "family"
       );
       setFamily(familyArr);
+
+      //for loop through the family array and pull the price values:
+
+      let famPriceArr = [];
+      for (let i = 0; i < familyArr.length; i++) {
+        let famItemPrice = familyArr[i].price;
+        console.log("famItemPrice: ", famItemPrice);
+        console.log("famPriceArr: ", famPriceArr);
+        famPriceArr.push(famItemPrice);
+      }
 
       let friendArr = userData.savedProducts.filter(
         (item) => item.listTag[0] === "friends"
@@ -104,6 +114,7 @@ const Lists = () => {
     <>
       <div>
         <h1>Family</h1>
+        <h2>Family Total:</h2>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           {family
             ? family.map((item) => {
@@ -121,6 +132,10 @@ const Lists = () => {
                       <Button
                         type="submit"
                         variant="contained"
+                        sx={{
+                          backgroundColor: "#A5D8F3",
+                          color: "#072636",
+                        }}
                         onClick={() => handleAddToCart(item.itemId)}
                       >
                         Add To Cart
@@ -128,6 +143,10 @@ const Lists = () => {
                       <Button
                         type="submit"
                         variant="contained"
+                        sx={{
+                          backgroundColor: "#A5D8F3",
+                          color: "#072636",
+                        }}
                         onClick={() => removeItem(item.itemId)}
                       >
                         Remove Item
@@ -141,6 +160,7 @@ const Lists = () => {
       </div>
       <div>
         <h1>Friends</h1>
+        <h2>Friends Total:</h2>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           {friends
             ? friends.map((item) => {
@@ -158,6 +178,10 @@ const Lists = () => {
                       <Button
                         type="submit"
                         variant="contained"
+                        sx={{
+                          backgroundColor: "#A5D8F3",
+                          color: "#072636",
+                        }}
                         onClick={() => handleAddToCart(item.itemId)}
                       >
                         Add To Cart
@@ -165,6 +189,10 @@ const Lists = () => {
                       <Button
                         type="submit"
                         variant="contained"
+                        sx={{
+                          backgroundColor: "#A5D8F3",
+                          color: "#072636",
+                        }}
                         onClick={() => removeItem(item.itemId)}
                       >
                         Remove Item
@@ -178,6 +206,7 @@ const Lists = () => {
       </div>
       <div>
         <h1>Co-Workers</h1>
+        <h2>Co-Workers Total:</h2>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           {coWorker
             ? coWorker.map((item) => {
@@ -195,6 +224,10 @@ const Lists = () => {
                       <Button
                         type="submit"
                         variant="contained"
+                        sx={{
+                          backgroundColor: "#A5D8F3",
+                          color: "#072636",
+                        }}
                         onClick={() => handleAddToCart(item.itemId)}
                       >
                         Add To Cart
@@ -202,6 +235,10 @@ const Lists = () => {
                       <Button
                         type="submit"
                         variant="contained"
+                        sx={{
+                          backgroundColor: "#A5D8F3",
+                          color: "#072636",
+                        }}
                         onClick={() => removeItem(item.itemId)}
                       >
                         Remove Item

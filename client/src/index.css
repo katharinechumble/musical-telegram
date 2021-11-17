@@ -1,3 +1,14 @@
+* {
+	box-sizing: border-box;
+}
+
+:root{
+	--textcolor: #072636;
+	--primarycolor: #ffff;
+	--secondarycolor: #F1F6F9;
+	--accentcolor: #A5D8F3;
+}
+
 .login-style {
 	max-width: 500px;
 	padding: 10px 20px;

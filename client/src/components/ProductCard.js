@@ -76,7 +76,7 @@ const ProductCard = (props) => {
 					},
 				},
 			});
-			console.log("data: ", data);
+
 			return data;
 		} catch (err) {
 			console.log(err);

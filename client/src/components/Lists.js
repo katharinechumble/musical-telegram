@@ -49,7 +49,6 @@ const Lists = () => {
 		const productToCart = userData.savedProducts.find(
 			(item) => item.itemId === id
 		);
-		console.log("productToCart: ", productToCart);
 
 		const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -74,7 +73,7 @@ const Lists = () => {
 					},
 				},
 			});
-			console.log("data: ", data);
+
 			return data;
 		} catch (err) {
 			console.log(err);
@@ -92,7 +91,6 @@ const Lists = () => {
 			const { data } = await removeListItem({
 				variables: { itemId },
 			});
-			console.log(data, itemId);
 		} catch (err) {
 			console.error(err);
 		}
@@ -126,13 +124,6 @@ const Lists = () => {
 												onClick={() => handleAddToCart(item.itemId)}
 											>
 												Add To Cart
-											</Button>
-											<Button
-												type="submit"
-												variant="contained"
-												onClick={() => removeItem(item.itemId)}
-											>
-												Remove Item
 											</Button>
 										</div>
 									</Grid>

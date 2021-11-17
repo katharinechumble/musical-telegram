@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 //still trying to fix heroku
-
+//change
 import { useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import CartItem from "./CartItem";

@@ -1,13 +1,3 @@
-<style type="text/css" rel="stylesheet">
-
-section{
-    display: flex
-}
-
-.ml{
-    margin-left: 2rem
-}
-</style>
 
 # Holiday Chaos Coordinator
 
@@ -54,7 +44,7 @@ Michael Hodges
 
 - [GitHub Profile](https://github.com/mjh1985codeman)
 - [LinkedIn](https://www.linkedin.com/in/michael-hodges-937225ba/)
-- [Portfolio](https://dzamanillo.github.io/)
+- [Portfolio](https://mjh1985codeman.github.io/My-Portfolio/)
 </div>
 
 <div class="ml">
@@ -62,7 +52,7 @@ Katharine Humble
 
 - [GitHub Profile](https://github.com/katharinechumble)
 - [LinkedIn](https://www.linkedin.com/in/katharine-humble-45906012b/)
-- [Portfolio](https://dzamanillo.github.io/)
+- [Portfolio](https://katharinechumble.github.io/)
 </div>
 
 <div class="ml">

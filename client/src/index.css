@@ -1,12 +1,33 @@
-.login-style {
+* {
+	box-sizing: border-box;
+}
+
+:root{
+	--textcolor: #072636;
+	--primarycolor: #ffff;
+	--secondarycolor: #F1F6F9;
+	--accentcolor: #A5D8F3;
+}
+
+body {
+	background-color: var(--secondarycolor);
+	background-image: "../public/imgs/backgroundlightmode.png";
+	position: fixed;
+	margin: 0;
+	padding: 0;
+	color: var(--textcolor);
+	font-size: 16px;
+	font-family: "Roboto";
+}
+
+.login-style{
 	max-width: 500px;
 	padding: 10px 20px;
-	background: #f4f7f8;
+	background: var(--accentcolor);
 	margin: 10px auto;
 	padding: 20px;
-	background: #f4f7f8;
 	border-radius: 8px;
-	font-family: Georgia, "Times New Roman", Times, serif;
+	font-family: "Roboto";
 }
 
 #signUp-alert {
@@ -29,7 +50,8 @@
 	position: relative;
 	display: flex;
 	justify-content: center;
-	color: black;
+	color: var(--textcolor);
+	text-decoration: none;
 	margin: 0 auto;
 	font-size: 16px;
 	text-align: center;
@@ -46,7 +68,7 @@
 .login-style input[type="text"],
 .login-style textarea,
 .login-style select {
-	font-family: Georgia, "Times New Roman", Times, serif;
+	font-family: "Roboto";
 	background: rgba(255, 255, 255, 0.1);
 	border: none;
 	border-radius: 4px;
@@ -55,16 +77,15 @@
 	outline: 0;
 	padding: 10px;
 	width: 100%;
-	box-sizing: border-box;
-	background-color: #e8eeef;
-	color: #8a97a0;
+	background-color: var(--accentcolor);
+	color: var(--textcolor);
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
 	margin-bottom: 30px;
 }
 .login-style input[type="text"]:focus,
 .login-style textarea:focus,
 .login-style select:focus {
-	background: #d2d9dd;
+	background: var(--secondarycolor);
 }
 .login-style select {
 	-webkit-appearance: menulist-button;

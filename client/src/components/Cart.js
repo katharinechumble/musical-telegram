@@ -24,11 +24,13 @@ const Cart = () => {
     let cartPriceArray = [];
     userData.savedProducts.forEach((item) => {
       if (item.cartValue) {
+        //filters out the $ so it doesn't return NaN.
         let itemPrice = item.price.replace("$", "");
         console.log("itemPrice: ", itemPrice);
-        let itemPriceNum = parseInt(itemPrice);
+        //converts from a string to an Intger so Math Methods can be ran on it.
+        let itemPriceNum = parseFloat(itemPrice);
         console.log("itemPriceNum: ", itemPriceNum);
-        let fixedItemPrice = Math.abs(itemPriceNum);
+        let fixedItemPrice = itemPriceNum;
         console.log("fixedItemPrice: ", fixedItemPrice);
         cartPriceArray.push(fixedItemPrice);
       }
@@ -38,7 +40,7 @@ const Cart = () => {
 
     let cartTotal = lodash.sum(cartPriceArray);
     console.log("cartTotal: ", cartTotal);
-    return cartTotal;
+    return cartTotal.toFixed(2);
   }
 
   if (loading) {

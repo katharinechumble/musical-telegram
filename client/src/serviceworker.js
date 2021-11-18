@@ -4,7 +4,12 @@ const FILES_TO_CACHE = [
     "/index.css",
     "../public/logo192.png",
     "../public/logo512.png",
-    "https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Rubik:ital,wght@0,400;1,300&display=swap"
+    "https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Rubik:ital,wght@0,400;1,300&display=swap",
+    "../public/imgs/backgroundlightmode.png",
+    "../public/imgs/backgrounddarkmode.png",
+    "../public/imgs/hcclogolg.png",
+    "../public/imgs/hcclogomd.png",
+    "../public/imgs/hcclogosm.png"
 ];
 
 const CACHE_NAME = "static-cache-v1";

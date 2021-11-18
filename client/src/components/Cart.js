@@ -54,16 +54,6 @@ const Cart = () => {
     );
   }
 
-  for (let i = 0; i < userData.savedProducts.length; i++) {
-    if (!userData.savedProducts[i].cartValue === true) {
-      return (
-        <Typography variant="h2" gutterBottom component="div">
-          No items in Cart!
-        </Typography>
-      );
-    }
-  }
-
   return (
     <>
       <Typography

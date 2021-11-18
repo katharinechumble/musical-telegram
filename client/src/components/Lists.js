@@ -12,12 +12,11 @@ import Auth from "../utils/auth";
 import Grid from "@mui/material/Grid";
 import { REMOVE_LIST_ITEM } from "../utils/mutations";
 
-//addToCart Functionality global
+// let famItemPrice;
 
 const Lists = () => {
   const { data, loading } = useQuery(GET_ME);
   const userData = data?.me || {};
-
   const [family, setFamily] = useState([]);
   const [friends, setFriends] = useState([]);
   const [coWorker, setCoWorker] = useState([]);
@@ -118,6 +117,10 @@ const Lists = () => {
                           disabled
                           type="submit"
                           variant="contained"
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
                           // onClick={() => handleAddToCart(item.itemId)}
                         >
                           In Cart
@@ -127,6 +130,10 @@ const Lists = () => {
                           type="submit"
                           variant="contained"
                           onClick={() => handleAddToCart(item.itemId)}
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
                         >
                           Add To Cart
                         </Button>
@@ -168,6 +175,10 @@ const Lists = () => {
                           type="submit"
                           variant="contained"
                           // onClick={() => handleAddToCart(item.itemId)}
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
                         >
                           In Cart
                         </Button>
@@ -216,6 +227,10 @@ const Lists = () => {
                           disabled
                           type="submit"
                           variant="contained"
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
                           // onClick={() => handleAddToCart(item.itemId)}
                         >
                           In Cart
@@ -224,6 +239,10 @@ const Lists = () => {
                         <Button
                           type="submit"
                           variant="contained"
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
                           onClick={() => handleAddToCart(item.itemId)}
                         >
                           Add To Cart

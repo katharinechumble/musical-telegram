@@ -93,6 +93,10 @@ const SearchResults = () => {
           {searchInput ? (
             <Button
               onClick={() => setClicked(true)}
+              sx={{
+                backgroundColor: "#A5D8F3",
+                color: "#072636",
+              }}
               type="submit"
               variant="contained"
               size="large"
@@ -103,6 +107,10 @@ const SearchResults = () => {
           ) : (
             <Button
               disabled
+              sx={{
+                backgroundColor: "#A5D8F3",
+                color: "#072636",
+              }}
               variant="contained"
               size="large"
               endIcon={<ShoppingCartIcon />}

@@ -16,6 +16,31 @@
       "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
+    },
+    {
+      "src": "/imgs/hcclogolg.png",
+      "type": "image/png",
+      "sizes": "1050x1050"
+    },
+    {
+      "src": "/imgs/hcclogomd.png",
+      "type": "image/png",
+      "sizes": "525x525"
+    },
+    {
+      "src": "/imgs/hcclogosm.png",
+      "type": "image/png",
+      "sizes": "250x250"
+    },
+    {
+      "src": "/imgs/backgrounddarkmode.png",
+      "type": "image/png",
+      "sizes": "1920x1080"
+    },
+    {
+      "src": "/imgs/backgroundlightmode.png",
+      "type": "image/png",
+      "sizes": "1920x1080"
     }
   ],
   "start_url": ".",

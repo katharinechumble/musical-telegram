@@ -26,6 +26,7 @@ The holidays are fast approaching and you could use a hand in keeping your shopp
 ![Mongoose](https://img.shields.io/badge/Mongoose-%39477F.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
+![LoDash](https://img.shields.io/badge/Lo-LoDash-green)
 
   </div>
 

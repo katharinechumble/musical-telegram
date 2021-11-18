@@ -167,7 +167,7 @@ const Lists = () => {
 
   return (
     <>
-      <div>
+      <div className="ListTitleDisp">
         <h1>Family</h1>
         <Typography
           sx={{ padding: "1rem" }}
@@ -191,41 +191,53 @@ const Lists = () => {
                       price={item.price}
                       description={item.description}
                     />
-                    <div key={item.itemId} className="list-addtocart">
-                      {item.cartValue ? (
-                        <Button
-                          disabled
-                          type="submit"
-                          variant="contained"
-                          sx={{
-                            backgroundColor: "#A5D8F3",
-                            color: "#072636",
-                          }}
-                          // onClick={() => handleAddToCart(item.itemId)}
-                        >
-                          In Cart
-                        </Button>
-                      ) : (
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          onClick={() => handleAddToCart(item.itemId)}
-                          sx={{
-                            backgroundColor: "#A5D8F3",
-                            color: "#072636",
-                          }}
-                        >
-                          Add To Cart
-                        </Button>
-                      )}
-
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        onClick={() => removeItem(item.itemId)}
-                      >
-                        Remove Item
-                      </Button>
+                    <div className="list-disp">
+                      <div key={item.itemId} className="list-addtocart">
+                        {item.cartValue ? (
+                          <Button
+                            container
+                            spacing={2}
+                            sx={{ justifyContent: "center" }}
+                            disabled
+                            type="submit"
+                            variant="contained"
+                            sx={{
+                              backgroundColor: "#A5D8F3",
+                              color: "#072636",
+                            }}
+                            // onClick={() => handleAddToCart(item.itemId)}
+                          >
+                            In Cart
+                          </Button>
+                        ) : (
+                          <Button
+                            container
+                            spacing={2}
+                            sx={{ justifyContent: "center" }}
+                            type="submit"
+                            variant="contained"
+                            onClick={() => handleAddToCart(item.itemId)}
+                            sx={{
+                              backgroundColor: "#A5D8F3",
+                              color: "#072636",
+                            }}
+                          >
+                            Add To Cart
+                          </Button>
+                        )}
+                        <div className="rmv-list-btn">
+                          <Button
+                            container
+                            spacing={2}
+                            sx={{ justifyContent: "space-around" }}
+                            type="submit"
+                            variant="contained"
+                            onClick={() => removeItem(item.itemId)}
+                          >
+                            Remove Item
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   </Grid>
                 );
@@ -233,7 +245,7 @@ const Lists = () => {
             : null}
         </Grid>
       </div>
-      <div>
+      <div className="ListTitleDisp">
         <h1>Friends</h1>
         <Typography
           sx={{ padding: "1rem" }}
@@ -257,37 +269,53 @@ const Lists = () => {
                       price={item.price}
                       description={item.description}
                     />
-                    <div key={item.itemId} className="list-addtocart">
-                      {item.cartValue ? (
-                        <Button
-                          disabled
-                          type="submit"
-                          variant="contained"
-                          // onClick={() => handleAddToCart(item.itemId)}
-                          sx={{
-                            backgroundColor: "#A5D8F3",
-                            color: "#072636",
-                          }}
-                        >
-                          In Cart
-                        </Button>
-                      ) : (
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          onClick={() => handleAddToCart(item.itemId)}
-                        >
-                          Add To Cart
-                        </Button>
-                      )}
-
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        onClick={() => removeItem(item.itemId)}
-                      >
-                        Remove Item
-                      </Button>
+                    <div className="list-disp">
+                      <div key={item.itemId} className="list-addtocart">
+                        {item.cartValue ? (
+                          <Button
+                            container
+                            spacing={2}
+                            sx={{ justifyContent: "center" }}
+                            disabled
+                            type="submit"
+                            variant="contained"
+                            sx={{
+                              backgroundColor: "#A5D8F3",
+                              color: "#072636",
+                            }}
+                            // onClick={() => handleAddToCart(item.itemId)}
+                          >
+                            In Cart
+                          </Button>
+                        ) : (
+                          <Button
+                            container
+                            spacing={2}
+                            sx={{ justifyContent: "center" }}
+                            type="submit"
+                            variant="contained"
+                            onClick={() => handleAddToCart(item.itemId)}
+                            sx={{
+                              backgroundColor: "#A5D8F3",
+                              color: "#072636",
+                            }}
+                          >
+                            Add To Cart
+                          </Button>
+                        )}
+                        <div className="rmv-list-btn">
+                          <Button
+                            container
+                            spacing={2}
+                            sx={{ justifyContent: "space-around" }}
+                            type="submit"
+                            variant="contained"
+                            onClick={() => removeItem(item.itemId)}
+                          >
+                            Remove Item
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   </Grid>
                 );
@@ -295,7 +323,7 @@ const Lists = () => {
             : null}
         </Grid>
       </div>
-      <div>
+      <div className="ListTitleDisp">
         <h1>Co-Workers</h1>
         <Typography
           sx={{ padding: "1rem" }}
@@ -319,41 +347,53 @@ const Lists = () => {
                       price={item.price}
                       description={item.description}
                     />
-                    <div key={item.itemId} className="list-addtocart">
-                      {item.cartValue ? (
-                        <Button
-                          disabled
-                          type="submit"
-                          variant="contained"
-                          sx={{
-                            backgroundColor: "#A5D8F3",
-                            color: "#072636",
-                          }}
-                          // onClick={() => handleAddToCart(item.itemId)}
-                        >
-                          In Cart
-                        </Button>
-                      ) : (
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          sx={{
-                            backgroundColor: "#A5D8F3",
-                            color: "#072636",
-                          }}
-                          onClick={() => handleAddToCart(item.itemId)}
-                        >
-                          Add To Cart
-                        </Button>
-                      )}
-
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        onClick={() => removeItem(item.itemId)}
-                      >
-                        Remove Item
-                      </Button>
+                    <div className="list-disp">
+                      <div key={item.itemId} className="list-addtocart">
+                        {item.cartValue ? (
+                          <Button
+                            container
+                            spacing={2}
+                            sx={{ justifyContent: "center" }}
+                            disabled
+                            type="submit"
+                            variant="contained"
+                            sx={{
+                              backgroundColor: "#A5D8F3",
+                              color: "#072636",
+                            }}
+                            // onClick={() => handleAddToCart(item.itemId)}
+                          >
+                            In Cart
+                          </Button>
+                        ) : (
+                          <Button
+                            container
+                            spacing={2}
+                            sx={{ justifyContent: "center" }}
+                            type="submit"
+                            variant="contained"
+                            onClick={() => handleAddToCart(item.itemId)}
+                            sx={{
+                              backgroundColor: "#A5D8F3",
+                              color: "#072636",
+                            }}
+                          >
+                            Add To Cart
+                          </Button>
+                        )}
+                        <div className="rmv-list-btn">
+                          <Button
+                            container
+                            spacing={2}
+                            sx={{ justifyContent: "space-around" }}
+                            type="submit"
+                            variant="contained"
+                            onClick={() => removeItem(item.itemId)}
+                          >
+                            Remove Item
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   </Grid>
                 );

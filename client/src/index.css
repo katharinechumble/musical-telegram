@@ -110,3 +110,31 @@ body {
 	justify-content: space-evenly;
 	margin: 5px;
 }
+
+.ListTitleDisp {
+	position: relative;
+	flex-direction: column;
+	padding: 19px 39px 18px 39px;
+	margin: 0 auto;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	width: 100%;
+	border-width: 1px 1px 3px;
+	margin-bottom: 10px;
+	
+}
+
+.list-disp {
+	display: flex;
+	align-items: center;
+	margin: 2px;
+}
+
+.rmv-list-btn {
+	margin-left: 80px;
+}
+
+
+
+

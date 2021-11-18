@@ -12,12 +12,11 @@ import Auth from "../utils/auth";
 import Grid from "@mui/material/Grid";
 import { REMOVE_LIST_ITEM } from "../utils/mutations";
 
-//addToCart Functionality global
+// let famItemPrice;
 
 const Lists = () => {
   const { data, loading } = useQuery(GET_ME);
   const userData = data?.me || {};
-
   const [family, setFamily] = useState([]);
   const [friends, setFriends] = useState([]);
   const [coWorker, setCoWorker] = useState([]);

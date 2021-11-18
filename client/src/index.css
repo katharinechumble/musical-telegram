@@ -11,8 +11,6 @@
 
 body {
 	background-color: var(--secondarycolor);
-	background-image: "../public/imgs/backgroundlightmode.png";
-	position: fixed;
 	margin: 0;
 	padding: 0;
 	color: var(--textcolor);

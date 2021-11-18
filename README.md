@@ -1,4 +1,3 @@
-
 # Holiday Chaos Coordinator
 
 ## About

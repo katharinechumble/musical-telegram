@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import ProductCard from "./ProductCard";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 import { useQuery, useMutation } from "@apollo/client";
 
@@ -11,6 +12,8 @@ import Auth from "../utils/auth";
 
 import Grid from "@mui/material/Grid";
 import { REMOVE_LIST_ITEM } from "../utils/mutations";
+
+const lodash = require("lodash");
 
 // let famItemPrice;
 
@@ -94,10 +97,87 @@ const Lists = () => {
     return <h2>Loading...</h2>;
   }
 
+  //List Totals Functionality:
+
+  // Family List Total.
+  function calculateFamTotal() {
+    let famPriceArray = [];
+    userData.savedProducts.forEach((item) => {
+      if (item.listTag[0] === "family") {
+        //filters out the $ so it doesn't return NaN.
+        let itemPrice = item.price.replace("$", "");
+
+        //converts from a string to an Intger so the lodash sum Method can be ran on it.
+        let itemPriceNum = parseFloat(itemPrice);
+
+        let fixedItemPrice = itemPriceNum;
+
+        famPriceArray.push(fixedItemPrice);
+      }
+    });
+
+    let famListTotal = lodash.sum(famPriceArray);
+
+    return famListTotal.toFixed(2);
+  }
+
+  // Friends List Total.
+  function calculateFriendsTotal() {
+    let friendPriceArray = [];
+    userData.savedProducts.forEach((item) => {
+      if (item.listTag[0] === "friends") {
+        //filters out the $ so it doesn't return NaN.
+        let itemPrice = item.price.replace("$", "");
+
+        //converts from a string to an Intger so the lodash sum Method can be ran on it.
+        let itemPriceNum = parseFloat(itemPrice);
+
+        let fixedItemPrice = itemPriceNum;
+
+        friendPriceArray.push(fixedItemPrice);
+      }
+    });
+
+    let friendListTotal = lodash.sum(friendPriceArray);
+
+    return friendListTotal.toFixed(2);
+  }
+
+  //Co-Workers List Total.
+  function calculateCoWrksTotal() {
+    let cwPriceArray = [];
+    userData.savedProducts.forEach((item) => {
+      if (item.listTag[0] === "co-workers") {
+        //filters out the $ so it doesn't return NaN.
+        let itemPrice = item.price.replace("$", "");
+
+        //converts from a string to an Intger so the lodash sum Method can be ran on it.
+        let itemPriceNum = parseFloat(itemPrice);
+
+        let fixedItemPrice = itemPriceNum;
+
+        cwPriceArray.push(fixedItemPrice);
+      }
+    });
+
+    let cwListTotal = lodash.sum(cwPriceArray);
+
+    return cwListTotal.toFixed(2);
+  }
+
   return (
     <>
       <div>
         <h1>Family</h1>
+        <Typography
+          sx={{ padding: "1rem" }}
+          align="center"
+          variant="h5"
+          gutterBottom
+          component="div"
+        >
+          Family Total: ${calculateFamTotal()}
+        </Typography>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           {family
             ? family.map((item) => {
@@ -155,6 +235,15 @@ const Lists = () => {
       </div>
       <div>
         <h1>Friends</h1>
+        <Typography
+          sx={{ padding: "1rem" }}
+          align="center"
+          variant="h5"
+          gutterBottom
+          component="div"
+        >
+          Friends Total: ${calculateFriendsTotal()}
+        </Typography>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           {friends
             ? friends.map((item) => {
@@ -208,6 +297,15 @@ const Lists = () => {
       </div>
       <div>
         <h1>Co-Workers</h1>
+        <Typography
+          sx={{ padding: "1rem" }}
+          align="center"
+          variant="h5"
+          gutterBottom
+          component="div"
+        >
+          Co-Workers Total: ${calculateCoWrksTotal()}
+        </Typography>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           {coWorker
             ? coWorker.map((item) => {

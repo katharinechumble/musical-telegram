@@ -32,7 +32,7 @@ The holidays are fast approaching and you could use a hand in keeping your shopp
 
 ## Links:
 
-- [Deployment](https://holiday-chaos-coordinator.herokuapp.com/)
+- [Deployment](https://mh-holiday-chaos-coordinator.herokuapp.com/)
 - [GitHub](https://github.com/katharinechumble/musical-telegram)
 
 ## Contribution

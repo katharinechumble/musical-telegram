@@ -22,6 +22,8 @@ import SavedItems from "./components/SavedItems";
 import Lists from "./components/Lists";
 import Cart from "./components/Cart";
 
+console.log(process.env.REACT_APP_API_KEY);
+
 const httpLink = createHttpLink({
 	uri: "/graphql",
 });

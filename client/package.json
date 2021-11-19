@@ -20,12 +20,14 @@
     "graphql": "^15.7.2",
     "graphql-tag": "^2.10.3",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.21",
     "onsenui": "^2.11.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.6.4",
     "react-dom": "^16.13.1",
     "react-onsenui": "^1.11.5",
-    "react-router-dom": "^5.1.2",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "3.4.1",
     "styled-components": "^5.3.3"
   },
@@ -33,7 +35,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "develop": "react-scripts develop"
   },
   "eslintConfig": {
     "extends": "react-app"

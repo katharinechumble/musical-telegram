@@ -11,12 +11,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Paper from "@mui/material/Paper";
 import ReorderIcon from "@mui/icons-material/Reorder";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 // import Auth from "../utils/auth";
 
 const NavBar = () => {
-	const history = useHistory();
+  const history = useHistory();
 
 	return (
 		<>
@@ -37,11 +37,13 @@ const NavBar = () => {
 						/>
 					) : null}
 					{/* Cart */}
-					<BottomNavigationAction
-						onClick={() => history.push("/cart")}
-						label="Cart"
-						icon={<ShoppingCartIcon />}
-					/>
+					{Auth.loggedIn() ? (
+						<BottomNavigationAction
+							onClick={() => history.push("/cart")}
+							label="Cart"
+							icon={<ShoppingCartIcon />}
+						/>
+					) : null}
 					{/* Sign Up */}
 					{Auth.loggedIn() ? null : (
 						<BottomNavigationAction
@@ -52,24 +54,28 @@ const NavBar = () => {
 					)}
 					{/* Log Out */}
 
-					{Auth.loggedIn() ? (
-						<BottomNavigationAction
-							onClick={() => Auth.logout()}
-							label="Logout"
-							icon={<LogoutIcon />}
-						/>
-					) : (
-						// Log In
-						<BottomNavigationAction
-							onClick={() => history.push("/login")}
-							label="Login"
-							icon={<LoginIcon />}
-						/>
-					)}
-				</BottomNavigation>
-			</Paper>
-		</>
-	);
+          {Auth.loggedIn() ? (
+            <BottomNavigationAction
+              sx={{
+                backgroundColor: "#A5D8F3",
+                color: "#072636",
+              }}
+              onClick={() => Auth.logout()}
+              label="Logout"
+              icon={<LogoutIcon />}
+            />
+          ) : (
+            // Log In
+            <BottomNavigationAction
+              onClick={() => history.push("/login")}
+              label="Login"
+              icon={<LoginIcon />}
+            />
+          )}
+        </BottomNavigation>
+      </Paper>
+    </>
+  );
 };
 
 export default NavBar;

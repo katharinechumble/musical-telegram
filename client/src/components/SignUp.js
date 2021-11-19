@@ -139,6 +139,10 @@ const SignUp = () => {
 							userFormData.password
 						)
 					}
+					sx={{
+						backgroundColor: "#A5D8F3",
+						color: "#072636",
+					  }}
 					type="submit"
 					variant="contained"
 				>

@@ -83,6 +83,10 @@ const Login = () => {
             disabled={!(userFormData.username && userFormData.password)}
             type="submit"
             variant="contained"
+            sx={{
+              backgroundColor: "#A5D8F3",
+              color: "#072636"
+            }}
           >
             Submit
           </Button>

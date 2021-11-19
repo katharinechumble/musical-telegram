@@ -9,32 +9,34 @@ import { useMutation } from "@apollo/client";
 
 import Auth from "../utils/auth";
 
-import { REMOVE_CART_ITEM } from "../utils/mutations";
+import { ADD_TO_CART } from "../utils/mutations";
 
 const CartItem = (props) => {
-  const [removeCartItem] = useMutation(REMOVE_CART_ITEM);
-
-  console.log("props: ", props);
   //remove cart item functionality.
-  const removeFromCart = async (itemId) => {
+  const [cartToTrue] = useMutation(ADD_TO_CART);
+  //Add To Cart functionality.
+
+  const handleAddToCart = async (itemId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    const removeId = await itemId;
-    console.log("removeId: ", removeId);
+
     if (!token) {
       return false;
     }
-    try {
-      const { data } = await removeCartItem({
-        variables: { itemId: removeId },
-      });
-      console.log(data, itemId);
 
+    const cartToggle = false;
+
+    try {
+      const { data } = await cartToTrue({
+        variables: {
+          itemId: itemId,
+          cartBool: cartToggle,
+        },
+      });
       return data;
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
-
   return (
     <>
       <Card
@@ -61,7 +63,7 @@ const CartItem = (props) => {
           </CardContent>
           <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
             <Button
-              onClick={() => removeFromCart(props.productId)}
+              onClick={() => handleAddToCart(props.productId)}
               color="warning"
             >
               Remove

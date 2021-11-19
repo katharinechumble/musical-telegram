@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import ProductCard from "./ProductCard";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 import { useQuery, useMutation } from "@apollo/client";
 
@@ -12,217 +13,356 @@ import Auth from "../utils/auth";
 import Grid from "@mui/material/Grid";
 import { REMOVE_LIST_ITEM } from "../utils/mutations";
 
-//addToCart Functionality global.
+const lodash = require("lodash");
+
+// let famItemPrice;
 
 const Lists = () => {
-	const { data, loading } = useQuery(GET_ME);
-	const userData = data?.me || {};
+  const { data, loading } = useQuery(GET_ME);
+  const userData = data?.me || {};
+  const [family, setFamily] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [coWorker, setCoWorker] = useState([]);
 
-	const [family, setFamily] = useState([]);
-	const [friends, setFriends] = useState([]);
-	const [coWorker, setCoWorker] = useState([]);
+  const [removeListItem] = useMutation(REMOVE_LIST_ITEM);
 
-	const [removeListItem] = useMutation(REMOVE_LIST_ITEM);
+  useEffect(() => {
+    if (!loading && userData) {
+      let familyArr = userData.savedProducts.filter(
+        (item) => item.listTag[0] === "family"
+      );
 
-	useEffect(() => {
-		if (!loading && userData) {
-			let familyArr = userData.savedProducts.filter(
-				(item) => item.listTag[0] === "family"
-			);
-			setFamily(familyArr);
+      setFamily(familyArr);
 
-			let friendArr = userData.savedProducts.filter(
-				(item) => item.listTag[0] === "friends"
-			);
-			setFriends(friendArr);
+      let friendArr = userData.savedProducts.filter(
+        (item) => item.listTag[0] === "friends"
+      );
 
-			let coWorkerArr = userData.savedProducts.filter(
-				(item) => item.listTag[0] === "co-workers"
-			);
-			setCoWorker(coWorkerArr);
-		}
-	}, [userData, loading]);
+      setFriends(friendArr);
 
-	const [addToCart] = useMutation(ADD_TO_CART);
-	//Add To Cart functionality.
-	const handleAddToCart = async (id) => {
-		const productToCart = userData.savedProducts.find(
-			(item) => item.itemId === id
-		);
-		console.log("productToCart: ", productToCart);
+      let coWorkerArr = userData.savedProducts.filter(
+        (item) => item.listTag[0] === "co-workers"
+      );
 
-		const token = Auth.loggedIn() ? Auth.getToken() : null;
+      setCoWorker(coWorkerArr);
+    }
+  }, [userData, loading]);
 
-		if (!token) {
-			return false;
-		}
+  const [cartToTrue] = useMutation(ADD_TO_CART);
+  //Add To Cart functionality.
+  const handleAddToCart = async (id) => {
+    const productToCart = userData.savedProducts.find(
+      (item) => item.itemId === id
+    );
 
-		const { itemId, itemName, price, imgUrl, buyUrl, description, listTag } =
-			productToCart;
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-		try {
-			const { data } = await addToCart({
-				variables: {
-					productData: {
-						itemId,
-						itemName,
-						price,
-						imgUrl,
-						buyUrl,
-						description,
-						listTag,
-					},
-				},
-			});
-			console.log("data: ", data);
-			return data;
-		} catch (err) {
-			console.log(err);
-		}
-	};
+    if (!token) {
+      return false;
+    }
 
-	//remove list item functionality.
-	const removeItem = async (itemId) => {
-		const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const cartToggle = !productToCart.cartValue;
 
-		if (!token) {
-			return false;
-		}
-		try {
-			const { data } = await removeListItem({
-				variables: { itemId },
-			});
-			console.log(data, itemId);
-		} catch (err) {
-			console.error(err);
-		}
-	};
+    try {
+      const { data } = await cartToTrue({
+        variables: {
+          itemId: productToCart.itemId,
+          cartBool: cartToggle,
+        },
+      });
 
-	if (loading) {
-		return <h2>Loading...</h2>;
-	}
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-	return (
-		<>
-			<div>
-				<h1>Family</h1>
-				<Grid container spacing={2} sx={{ justifyContent: "center" }}>
-					{family
-						? family.map((item) => {
-								return (
-									<>
-										<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
-											<ProductCard
-												keyValue={item.itemId}
-												itemName={item.itemName}
-												buyUrl={item.buyUrl}
-												imgUrl={item.imgUrl}
-												price={item.price}
-												description={item.description}
-											/>
-											<div className="list-addtocart">
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => handleAddToCart(item.itemId)}
-												>
-													Add To Cart
-												</Button>
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => removeItem(item.itemId)}
-												>
-													Remove Item
-												</Button>
-											</div>
-										</Grid>
-									</>
-								);
-						  })
-						: null}
-				</Grid>
-			</div>
-			<div>
-				<h1>Friends</h1>
-				<Grid container spacing={2} sx={{ justifyContent: "center" }}>
-					{friends
-						? friends.map((item) => {
-								return (
-									<>
-										<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
-											<ProductCard
-												keyValue={item.itemId}
-												itemName={item.itemName}
-												buyUrl={item.buyUrl}
-												imgUrl={item.imgUrl}
-												price={item.price}
-												description={item.description}
-											/>
-											<div className="list-addtocart">
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => handleAddToCart(item.itemId)}
-												>
-													Add To Cart
-												</Button>
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => removeItem(item.itemId)}
-												>
-													Remove Item
-												</Button>
-											</div>
-										</Grid>
-									</>
-								);
-						  })
-						: null}
-				</Grid>
-			</div>
-			<div>
-				<h1>Co-Workers</h1>
-				<Grid container spacing={2} sx={{ justifyContent: "center" }}>
-					{coWorker
-						? coWorker.map((item) => {
-								return (
-									<>
-										<Grid key={item.itemId} item xs={12} sm={6} md={4} lg={3}>
-											<ProductCard
-												keyValue={item.itemId}
-												itemName={item.itemName}
-												buyUrl={item.buyUrl}
-												imgUrl={item.imgUrl}
-												price={item.price}
-												description={item.description}
-											/>
-											<div className="list-addtocart">
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => handleAddToCart(item.itemId)}
-												>
-													Add To Cart
-												</Button>
-												<Button
-													type="submit"
-													variant="contained"
-													onClick={() => removeItem(item.itemId)}
-												>
-													Remove Item
-												</Button>
-											</div>
-										</Grid>
-									</>
-								);
-						  })
-						: null}
-				</Grid>
-			</div>
-		</>
-	);
+  //remove list item functionality.
+  const removeItem = async (itemId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+    try {
+      const { data } = await removeListItem({
+        variables: { itemId },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
+
+  //List Totals Functionality:
+
+  // Family List Total.
+  function calculateFamTotal() {
+    let famPriceArray = [];
+    userData.savedProducts.forEach((item) => {
+      if (item.listTag[0] === "family") {
+        //filters out the $ so it doesn't return NaN.
+        let itemPrice = item.price.replace("$", "");
+
+        //converts from a string to an Intger so the lodash sum Method can be ran on it.
+        let itemPriceNum = parseFloat(itemPrice);
+
+        let fixedItemPrice = itemPriceNum;
+
+        famPriceArray.push(fixedItemPrice);
+      }
+    });
+
+    let famListTotal = lodash.sum(famPriceArray);
+
+    return famListTotal.toFixed(2);
+  }
+
+  // Friends List Total.
+  function calculateFriendsTotal() {
+    let friendPriceArray = [];
+    userData.savedProducts.forEach((item) => {
+      if (item.listTag[0] === "friends") {
+        //filters out the $ so it doesn't return NaN.
+        let itemPrice = item.price.replace("$", "");
+
+        //converts from a string to an Intger so the lodash sum Method can be ran on it.
+        let itemPriceNum = parseFloat(itemPrice);
+
+        let fixedItemPrice = itemPriceNum;
+
+        friendPriceArray.push(fixedItemPrice);
+      }
+    });
+
+    let friendListTotal = lodash.sum(friendPriceArray);
+
+    return friendListTotal.toFixed(2);
+  }
+
+  //Co-Workers List Total.
+  function calculateCoWrksTotal() {
+    let cwPriceArray = [];
+    userData.savedProducts.forEach((item) => {
+      if (item.listTag[0] === "co-workers") {
+        //filters out the $ so it doesn't return NaN.
+        let itemPrice = item.price.replace("$", "");
+
+        //converts from a string to an Intger so the lodash sum Method can be ran on it.
+        let itemPriceNum = parseFloat(itemPrice);
+
+        let fixedItemPrice = itemPriceNum;
+
+        cwPriceArray.push(fixedItemPrice);
+      }
+    });
+
+    let cwListTotal = lodash.sum(cwPriceArray);
+
+    return cwListTotal.toFixed(2);
+  }
+
+  return (
+    <>
+      <div>
+        <h1>Family</h1>
+        <Typography
+          sx={{ padding: "1rem" }}
+          align="center"
+          variant="h5"
+          gutterBottom
+          component="div"
+        >
+          Family Total: ${calculateFamTotal()}
+        </Typography>
+        <Grid container spacing={2} sx={{ justifyContent: "center" }}>
+          {family
+            ? family.map((item) => {
+                return (
+                  <Grid key={item.itemName} item xs={12} sm={6} md={4} lg={3}>
+                    <ProductCard
+                      keyValue={item.itemId}
+                      itemName={item.itemName}
+                      buyUrl={item.buyUrl}
+                      imgUrl={item.imgUrl}
+                      price={item.price}
+                      description={item.description}
+                    />
+                    <div key={item.itemId} className="list-addtocart">
+                      {item.cartValue ? (
+                        <Button
+                          disabled
+                          type="submit"
+                          variant="contained"
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
+                          // onClick={() => handleAddToCart(item.itemId)}
+                        >
+                          In Cart
+                        </Button>
+                      ) : (
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          onClick={() => handleAddToCart(item.itemId)}
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
+                        >
+                          Add To Cart
+                        </Button>
+                      )}
+
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        onClick={() => removeItem(item.itemId)}
+                      >
+                        Remove Item
+                      </Button>
+                    </div>
+                  </Grid>
+                );
+              })
+            : null}
+        </Grid>
+      </div>
+      <div>
+        <h1>Friends</h1>
+        <Typography
+          sx={{ padding: "1rem" }}
+          align="center"
+          variant="h5"
+          gutterBottom
+          component="div"
+        >
+          Friends Total: ${calculateFriendsTotal()}
+        </Typography>
+        <Grid container spacing={2} sx={{ justifyContent: "center" }}>
+          {friends
+            ? friends.map((item) => {
+                return (
+                  <Grid key={item.itemName} item xs={12} sm={6} md={4} lg={3}>
+                    <ProductCard
+                      keyValue={item.itemId}
+                      itemName={item.itemName}
+                      buyUrl={item.buyUrl}
+                      imgUrl={item.imgUrl}
+                      price={item.price}
+                      description={item.description}
+                    />
+                    <div key={item.itemId} className="list-addtocart">
+                      {item.cartValue ? (
+                        <Button
+                          disabled
+                          type="submit"
+                          variant="contained"
+                          // onClick={() => handleAddToCart(item.itemId)}
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
+                        >
+                          In Cart
+                        </Button>
+                      ) : (
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          onClick={() => handleAddToCart(item.itemId)}
+                        >
+                          Add To Cart
+                        </Button>
+                      )}
+
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        onClick={() => removeItem(item.itemId)}
+                      >
+                        Remove Item
+                      </Button>
+                    </div>
+                  </Grid>
+                );
+              })
+            : null}
+        </Grid>
+      </div>
+      <div>
+        <h1>Co-Workers</h1>
+        <Typography
+          sx={{ padding: "1rem" }}
+          align="center"
+          variant="h5"
+          gutterBottom
+          component="div"
+        >
+          Co-Workers Total: ${calculateCoWrksTotal()}
+        </Typography>
+        <Grid container spacing={2} sx={{ justifyContent: "center" }}>
+          {coWorker
+            ? coWorker.map((item) => {
+                return (
+                  <Grid key={item.itemName} item xs={12} sm={6} md={4} lg={3}>
+                    <ProductCard
+                      keyValue={item.itemId}
+                      itemName={item.itemName}
+                      buyUrl={item.buyUrl}
+                      imgUrl={item.imgUrl}
+                      price={item.price}
+                      description={item.description}
+                    />
+                    <div key={item.itemId} className="list-addtocart">
+                      {item.cartValue ? (
+                        <Button
+                          disabled
+                          type="submit"
+                          variant="contained"
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
+                          // onClick={() => handleAddToCart(item.itemId)}
+                        >
+                          In Cart
+                        </Button>
+                      ) : (
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          sx={{
+                            backgroundColor: "#A5D8F3",
+                            color: "#072636",
+                          }}
+                          onClick={() => handleAddToCart(item.itemId)}
+                        >
+                          Add To Cart
+                        </Button>
+                      )}
+
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        onClick={() => removeItem(item.itemId)}
+                      >
+                        Remove Item
+                      </Button>
+                    </div>
+                  </Grid>
+                );
+              })
+            : null}
+        </Grid>
+      </div>
+    </>
+  );
 };
 
 export default Lists;
